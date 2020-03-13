@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST.in
+README.md
+filelock.py
+setup.py
+test.py
+filelock.egg-info/PKG-INFO
+filelock.egg-info/SOURCES.txt
+filelock.egg-info/dependency_links.txt
+filelock.egg-info/top_level.txt

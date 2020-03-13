@@ -1,0 +1,48 @@
+The history of this project is long and complicated, and so are
+their copyrights and licenses. I (Jesus Cea) write this document
+in orden to clarify the situation.
+
+This code was integrated once in Python 2.x, so I guess somebody
+did the paperwork related to contributor agreement. This code is
+derived from that version, so that could be a license
+checkpoint/blank sheet. I must verify that.
+
+New files will be covered by the 3-clause BSD license.
+
+License of Python files:
+
+    * Except the following files, license is 3-clause BSD license.
+      Jesus Cea Avion.
+
+    * test2.py, test3.py: Zope Public License, version 2.0.
+      Zope Corporation and contributors.
+
+    * Lib*/bsddb/dbrecio.py:
+      Itamar Shtull-Trauring <itamar@maxnm.com>.
+
+    * Lib*/bsddb/__init__.py: 3-clause BSD license.
+      Digital Creations and Andrew Kuchling.
+
+    * Lib*/bsddb/db.py: 3-clause BSD license.
+      Digital Creations and Andrew Kuchling.
+
+    * Lib*/bsddb/dbobj.py, dbutils.py: Free software.
+      Autonomous Zone Industries, Gregory P. Smith.
+
+    * Lib*/bsddb/dbtables.py: Free software.
+      Autonomous Zone Industries, Gregory P. Smith.
+
+    * Lib*/bsddb/test/test_dbtables.py: Free software.
+      Autonomous Zone Industries, Gregory P. Smith.
+
+    * Lib*/bsddb/dbshelve.py: Free software.
+      Total Control Software.
+
+License of C files:
+
+    * Modules/bsddb.h, _bsddb.c: 3-clause BSD license.
+      Digital Creations, Andrew Kuchling, Robin Dunn,
+      Gregory P. Smith, Duncan Grisby, Jesus Cea Avion.
+
+NOTE: If this file is changed, "docs/license.rst" must be updated too.
+

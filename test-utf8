@@ -1,0 +1,133 @@
+From 108@nfpsend1910.co.uk Thu Feb 20 16:03:33 2020
+Received: from nfpworkshops.vps-instance.com (nfpworkshops.vps-instance.com [84.18.217.59])
+	by opal.hydrus.org.uk (8.15.2/8.15.2) with ESMTPS id 01KG3X3Q001010
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <mark@hydrus.org.uk>; Thu, 20 Feb 2020 16:03:33 GMT
+	(envelope-from 108@nfpsend1910.co.uk)
+Message-Id: <202002201603.01KG3X3Q001010@opal.hydrus.org.uk>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=nfpsend1910.co.uk; s=default; h=Date:Content-Transfer-Encoding:MIME-Version
+	:Content-Type:To:Subject:From:Sender:Reply-To:Message-ID:Cc:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=+E8035szKnd3BPL2JL+ZrwRUbw91RXbV50yHEDmEx+8=; b=KBlAqtimYuqCSpFQ1nTzmY2FpA
+	Qf6Pcm3XNgCes8nhL9yOsrULIVFW7Jefg62sFaXcvvd1fro1dGxKsO9rdBRdsbsnsNVDtUQts8zXw
+	B0wiLuTaeKhXI9ZHPDkqv6t3QDrMgzdFvw90T+BZLip/Xl7fmdc0uTWbEkKxnnDKMTX5ARQPqZAAP
+	L2fCL3oeBnS2rp3KBQqP76zvNpXnZaKB1nkiYiJrxhz3MD+QbNsbmeZiEGGYtnMUWDaoie49eB+1R
+	7lnsYwvMdN20xzbOSuH4uUh9XF2lPUEhromQ+k+50hw3GCVEYqxipkuv2NCKCVoyB2AUAuyDDyKIG
+	0AjsYPtA==;
+Received: from [185.192.70.10] (port=51368 helo=185.192.70.129)
+	by nfpworkshops.vps-instance.com with esmtpsa (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+	(Exim 4.92)
+	(envelope-from <108@nfpsend1910.co.uk>)
+	id 1j4oIV-000548-UD
+	for mark@hydrus.org.uk; Thu, 20 Feb 2020 16:03:32 +0000
+From: "NFP Workshops" <108@nfpsend1910.co.uk>
+Subject: Bid Writing Workshops
+To: "mark" <mark@hydrus.org.uk>
+Content-Type: text/plain; charset=utf-8
+MIME-Version: 1.0
+Date: Thu, 20 Feb 2020 16:03:31 +0000
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - nfpworkshops.vps-instance.com
+X-AntiAbuse: Original Domain - hydrus.org.uk
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - nfpsend1910.co.uk
+X-Get-Message-Sender-Via: nfpworkshops.vps-instance.com: authenticated_id: 108@nfpsend1910.co.uk
+X-Authenticated-Sender: nfpworkshops.vps-instance.com: 108@nfpsend1910.co.uk
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by opal.hydrus.org.uk id 01KG3X3Q001010
+X-UID: 873                                                  
+Status: RO
+Content-Length: 3206
+
+NFP WORKSHOPS
+18 Blake Street, York YO1 8QG
+Bid Writing Workshops for Charities, Schools and Public Sector Organisations.
+
+UNSUBSCRIBES
+To unsubscribe please reply back replacing the subject line with mark@hydrus.org.uk
+Unsubscribes will take effect within seven days.
+
+QUESTIONS
+To ask a question please reply back replacing the subject line with question
+You will usually receive a response within 24 hours. 
+Due to our training and travel commitments we are unable to accept questions by phone.
+
+BOOKING DETAILS
+You can book any workshop online and pay using a debit card, credit card or paypal. 
+Just google  nfp workshops  to go to our website.
+
+BID WRITING: THE BASICS   Start 09.00  Finish 11.30  Cost £95
+
+Do you know the most common reasons for rejection? Are you gathering the right 
+evidence? Are you making the right arguments? Are you using the right 
+terminology? Are your numbers right? Are you learning from rejections? Are you 
+assembling the right documents? Do you know how to create a clear and concise 
+standard funding bid? Are you communicating with people or just excluding them? 
+Do you know your own organisation well enough? Are you thinking through your 
+projects carefully enough? Do you know enough about your competitors? Are you 
+answering the questions funders will ask themselves about your application? Are 
+you submitting applications correctly?
+
+BID WRITING: ADVANCED   Start 12.00  Finish 14.30  Cost £95
+
+Are you applying to the right trusts? Are you applying to enough trusts? Are you 
+asking for the right amount of money? Are you applying in the right ways? Are 
+your projects the most fundable projects? Are you carrying out trust fundraising 
+in a professional way? Are you delegating enough work? Are you highly productive 
+or just very busy? Are you looking for trusts in all the right places? How do 
+you compare with your competitors for funding? Is the rest of your fundraising 
+hampering your bids to trusts? Do you understand what trusts are ideally looking 
+for?
+
+ATTENDEES  
+
+Staff members, volunteers, trustees or board members of charities, schools or 
+public sector organisations who intend to submit grant funding applications to
+charitable grant making trusts and foundations. People who provide advice to these
+organisations are also welcome.
+
+LOCATIONS, DATES & VENUES
+
+LONDON        
+23 Mar 2020 - 27 Apr 2020 - 08 Jun 2020 - 15 Jun 2020
+200A Pentonville Road, Kings Cross, London N1 9JP
+
+SOUTHAMPTON   
+17 Mar 2020 - 09 Jun 2020
+Jurys Inn, Charlotte Place, Southampton SO14 0TB
+
+BRISTOL       
+18 Mar 2020 - 10 Jun 2020
+The Waterfront Meeting Rooms, Welsh Back, Bristol BS1 4SB
+
+EDINBURGH     
+19 Mar 2020 - 11 Jun 2020
+Courtyard, 1-3 Baxter's Place, Edinburgh EH1 3AF
+
+NEWCASTLE     
+20 Mar 2020 - 12 Jun 2020
+Jurys Inn, Scotswood Road, Newcastle upon Tyne NE1 4AD
+
+NOTTINGHAM    
+24 Mar 2020 - 16 Jun 2020
+Jurys Inn, Station Street, Nottingham NG2 3BJ
+
+BIRMINGHAM    
+25 Mar 2020 - 17 Jun 2020
+Jurys Inn, 245 Broad Street, Birmingham B1 2HQ
+
+MANCHESTER    
+26 Mar 2020 - 18 Jun 2020
+Jurys Inn, 56 Great Bridgewater Street, Manchester M1 5LE
+
+LEEDS         
+27 Mar 2020 - 19 Jun 2020
+Jurys Inn, Brewery Wharf, Brewery Place, Leeds LS10 1NE
+
+
