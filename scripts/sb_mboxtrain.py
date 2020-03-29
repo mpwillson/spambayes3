@@ -154,6 +154,11 @@ def maildir_train(h, path, is_spam, force, removetrained):
         sys.stdout.write("\r  Trained %d out of %d messages\n" %
                          (trained, counter))
 
+def mbox_factory(f):
+    """Return mbox messages as EmailMessage"""
+    
+    return email.message_from_binary_file(f,policy=email.policy.default)
+
 def mbox_train(h, path, is_spam, force):
     """Train bayes with a Unix mbox"""
 
@@ -162,7 +167,7 @@ def mbox_train(h, path, is_spam, force):
 
     import mailbox
 
-    mbox = mailbox.mbox(path,create=False)
+    mbox = mailbox.mbox(path,factory=mbox_factory,create=False)
     mbox.lock()
     
     counter = 0

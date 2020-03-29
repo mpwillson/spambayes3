@@ -320,7 +320,7 @@ by:
         f = file(path, "r+b")
     NameError: name 'file' is not defined
 
-file built removed in 3; changed to use open.
+file builtin removed in 3; changed to use open.
 
     [mark@opal:~/dev/spambayes-1.1a6-3]$ python scripts/sb_mboxtrain.py -g ~/mail/mbox -s ~/mail/spam
     Training ham (/home/mark/mail/mbox):
@@ -376,3 +376,85 @@ Policy must be specified, as default policy is compat32, which returns an
 `email.message.Message` instance.  Note this means that `email.policy`
 must be imported.
 
+# scripts/sb_mboxtrain.py
+
+The above change broke sb_mboxtrain.py:
+
+    [mark@opal:~/dev/spambayes3] python scripts/sb_mboxtrain.py -s ~/mail/spam
+    Training spam (/home/mark/mail/spam):
+      Reading as Unix mbox
+    Traceback (most recent call last):
+      File "scripts/sb_mboxtrain.py", line 325, in <module>
+        main()
+      File "scripts/sb_mboxtrain.py", line 316, in main
+        train(h, s, True, force, trainnew, removetrained)
+      File "scripts/sb_mboxtrain.py", line 238, in train
+        mbox_train(h, path, is_spam, force)
+      File "scripts/sb_mboxtrain.py", line 180, in mbox_train
+        if msg_train(h, msg, is_spam, force):
+      File "scripts/sb_mboxtrain.py", line 100, in msg_train
+        h.train(msg, is_spam)
+      File "/home/mark/dev/spambayes3/spambayes/hammie.py", line 164, in train          self.bayes.learn(tokenize(msg), is_spam)
+      File "/home/mark/dev/spambayes3/spambayes/classifier.py", line 253, in learn      self._add_msg(wordstream, is_spam)
+      File "/home/mark/dev/spambayes3/spambayes/classifier.py", line 354, in _add_msg
+        for word in set(wordstream):
+      File "/home/mark/dev/spambayes3/spambayes/tokenizer.py", line 1251, in tokenize
+        msg = self.get_message(obj)
+      File "/home/mark/dev/spambayes3/spambayes/tokenizer.py", line 1248, in get_message
+        return get_message(obj)
+      File "/home/mark/dev/spambayes3/spambayes/mboxutils.py", line 181, in get_message
+        msg = email.message_from_string(obj,policy=email.policy.default)
+      File "/usr/local/lib/python3.7/email/__init__.py", line 38, in message_from_string
+        return Parser(*args, **kws).parsestr(s)
+      File "/usr/local/lib/python3.7/email/parser.py", line 67, in parsestr
+        return self.parse(StringIO(text), headersonly=headersonly)
+    TypeError: initial_value must be str or None, not mboxMessage
+
+Changed mboxutils.get_message to treat obj or type mailbox.mboxMessage
+the same as email.message.EmailMessage and just return it. 
+
+    if isinstance(obj, email.message.EmailMessage) or \
+       isinstance(obj, mailbox.mboxMessage):
+        return obj
+    # Create an email Message object.
+
+That didn't work.  The result was this:
+
+    [mark@opal:~/dev/spambayes3]$ python scripts/sb_mboxtrain.py -s ~/mail/spam
+    Training spam (/home/mark/mail/spam):
+      Reading as Unix mbox
+    Traceback (most recent call last):
+      File "/home/mark/dev/spambayes3/spambayes/tokenizer.py", line 1633, in tokenize_body
+        text = part.get_content()
+    AttributeError: 'Message' object has no attribute 'get_content'
+
+    During handling of the above exception, another exception occurred:
+
+    Traceback (most recent call last):
+      File "scripts/sb_mboxtrain.py", line 325, in <module>
+        main()
+      File "scripts/sb_mboxtrain.py", line 316, in main
+        train(h, s, True, force, trainnew, removetrained)
+      File "scripts/sb_mboxtrain.py", line 238, in train
+        mbox_train(h, path, is_spam, force)
+      File "scripts/sb_mboxtrain.py", line 180, in mbox_train
+        if msg_train(h, msg, is_spam, force):
+      File "scripts/sb_mboxtrain.py", line 100, in msg_train
+        h.train(msg, is_spam)
+      File "/home/mark/dev/spambayes3/spambayes/hammie.py", line 164, in train          self.bayes.learn(tokenize(msg), is_spam)
+      File "/home/mark/dev/spambayes3/spambayes/classifier.py", line 253, in learn      self._add_msg(wordstream, is_spam)
+      File "/home/mark/dev/spambayes3/spambayes/classifier.py", line 354, in _add_msg
+        for word in set(wordstream):
+      File "/home/mark/dev/spambayes3/spambayes/tokenizer.py", line 1255, in tokenize
+        for tok in self.tokenize_body(msg):
+      File "/home/mark/dev/spambayes3/spambayes/tokenizer.py", line 1638, in tokenize_body
+        text = try_to_repair_damaged_base64(text)
+      File "/home/mark/dev/spambayes3/spambayes/tokenizer.py", line 885, in try_to_repair_damaged_base64
+        m = base64_re.match(text, i)
+    TypeError: cannot use a string pattern on a bytes-like object
+
+The correct fix was to read mbox messages as
+email.message.EmailMessage, using a factory. Fix is to sb_mboxtrain.py
+in mbox_train.
+
+From: [Stackoverflow](https://stackoverflow.com/questions/57456080/in-python-how-to-convert-an-email-message-message-object-into-an-email-messag)
