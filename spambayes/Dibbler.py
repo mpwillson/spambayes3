@@ -170,7 +170,7 @@ except ImportError:
     import io
 
 import sys, re, time, traceback, base64
-import socket, asyncore, asynchat, cgi, urllib.parse, webbrowser
+import socket, cgi, urllib.parse, webbrowser
 
 try:
     "".rstrip("abc")
@@ -183,6 +183,7 @@ else:
     RSTRIP_CHARS_AVAILABLE = True
 
 from spambayes.port import md5
+from spambayes import asyncore, asynchat
 
 class BrighterAsyncChat(asynchat.async_chat):
     """An asynchat.async_chat that doesn't give spurious warnings on

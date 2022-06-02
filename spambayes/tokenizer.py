@@ -33,7 +33,7 @@ else:
     import atexit
     atexit.register(cache.close)
 
- 
+
 # Patch encodings.aliases to recognize 'ansi_x3_4_1968'
 from encodings.aliases import aliases # The aliases dictionary
 if 'ansi_x3_4_1968' not in aliases:
@@ -998,15 +998,15 @@ crack_uuencode = UUencodeStripper().analyze
 
 # Strip and specially tokenize embedded URLish thingies.
 
-url_fancy_re = re.compile(r""" 
+url_fancy_re = re.compile(r"""
     \b                      # the preceeding character must not be alphanumeric
-    (?: 
+    (?:
         (?:
             (https? | ftp)  # capture the protocol
             ://             # skip the boilerplate
         )|
         (?= ftp\.[^\.\s<>"'\x7f-\xff] )|  # allow the protocol to be missing, but only if
-        (?= www\.[^\.\s<>"'\x7f-\xff] )   # the rest of the url starts "www.x" or "ftp.x" 
+        (?= www\.[^\.\s<>"'\x7f-\xff] )   # the rest of the url starts "www.x" or "ftp.x"
     )
     # Do a reasonable attempt at detecting the end.  It may or may not
     # be in HTML, may or may not be in quotes, etc.  If it's full of %
@@ -1063,44 +1063,48 @@ class URLStripper(Stripper):
 
             # now remove any obfuscation and probe around a bit
             url = urllib.parse.unquote(url)
-            scheme, netloc, path, params, query, frag = urllib.parse.urlparse(url)
+            try:
+                (scheme, netloc, path, params,
+                 query, frag) = urlparse.urlparse(url)
+            except ValueError:
+                pushclue("url:invalid-url")
+            else:
+                if options["Tokenizer", "x-lookup_ip"]:
+                    ips = cache.lookup(netloc)
+                    if not ips:
+                        pushclue("url-ip:lookup error")
+                    else:
+                        for clue in gen_dotted_quad_clues("url-ip", ips):
+                            pushclue(clue)
 
-            if options["Tokenizer", "x-lookup_ip"]:
-                ips = cache.lookup(netloc)
-                if not ips:
-                    pushclue("url-ip:lookup error")
-                else:
-                    for clue in gen_dotted_quad_clues("url-ip", ips):
-                        pushclue(clue)
+                # one common technique in bogus "please (re-)authorize yourself"
+                # scams is to make it appear as if you're visiting a valid
+                # payment-oriented site like PayPal, CitiBank or eBay, when you
+                # actually aren't.  The company's web server appears as the
+                # beginning of an often long username element in the URL such as
+                # http://www.paypal.com%65%43%99%35@10.0.1.1/iwantyourccinfo
+                # generally with an innocuous-looking fragment of text or a
+                # valid URL as the highlighted link.  Usernames should rarely
+                # appear in URLs (perhaps in a local bookmark you established),
+                # and never in a URL you receive from an unsolicited email or
+                # another website.
+                user_pwd, host_port = urllib.parse.splituser(netloc)
+                if user_pwd is not None:
+                    pushclue("url:has user")
 
-            # one common technique in bogus "please (re-)authorize yourself"
-            # scams is to make it appear as if you're visiting a valid
-            # payment-oriented site like PayPal, CitiBank or eBay, when you
-            # actually aren't.  The company's web server appears as the
-            # beginning of an often long username element in the URL such as
-            # http://www.paypal.com%65%43%99%35@10.0.1.1/iwantyourccinfo
-            # generally with an innocuous-looking fragment of text or a
-            # valid URL as the highlighted link.  Usernames should rarely
-            # appear in URLs (perhaps in a local bookmark you established),
-            # and never in a URL you receive from an unsolicited email or
-            # another website.
-            user_pwd, host_port = urllib.parse.splituser(netloc)
-            if user_pwd is not None:
-                pushclue("url:has user")
+                host, port = urllib.parse.splitport(host_port)
+                # web servers listening on non-standard ports are suspicious ...
+                if port is not None:
+                    if (scheme == "http" and port != '80' or
+                        scheme == "https" and port != '443'):
+                        pushclue("url:non-standard %s port" % scheme)
 
-            host, port = urllib.parse.splitport(host_port)
-            # web servers listening on non-standard ports are suspicious ...
-            if port is not None:
-                if (scheme == "http" and port != '80' or
-                    scheme == "https" and port != '443'):
-                    pushclue("url:non-standard %s port" % scheme)
+                # ... as are web servers associated with raw ip addresses
+                if re.match("(\d+\.?){4,4}$", host) is not None:
+                    pushclue("url:ip addr")
 
-            # ... as are web servers associated with raw ip addresses
-            if re.match("(\d+\.?){4,4}$", host) is not None:
-                pushclue("url:ip addr")
-
-            # make sure we later tokenize the unobfuscated url bits
-            proto, guts = url.split("://", 1)
+                # make sure we later tokenize the unobfuscated url bits
+                proto, guts = url.split("://", 1)
 
         # Lose the trailing punctuation for casual embedding, like:
         #     The code is at http://mystuff.org/here?  Didn't resolve.
@@ -1723,12 +1727,15 @@ def gen_dotted_quad_clues(pfx, ips):
     for ip in ips:
         yield "%s:%s/32" % (pfx, ip)
         dottedQuadList = ip.split(".")
-        yield "%s:%s/8" % (pfx, dottedQuadList[0])
-        yield "%s:%s.%s/16" % (pfx, dottedQuadList[0],
-                               dottedQuadList[1])
-        yield "%s:%s.%s.%s/24" % (pfx, dottedQuadList[0],
-                                  dottedQuadList[1],
-                                  dottedQuadList[2])
+        if len(dottedQuadList) >= 1:
+            yield "%s:%s/8" % (pfx, dottedQuadList[0])
+            if len(dottedQuadList) >= 2:
+                yield "%s:%s.%s/16" % (pfx, dottedQuadList[0],
+                                       dottedQuadList[1])
+                if len(dottedQuadList) >= 3:
+                    yield "%s:%s.%s.%s/24" % (pfx, dottedQuadList[0],
+                                            dottedQuadList[1],
+                                              dottedQuadList[2])
 
 global_tokenizer = Tokenizer()
 tokenize = global_tokenizer.tokenize

@@ -1,6 +1,30 @@
 [Note that all dates are in ISO 8601 format, e.g. YYYY-MM-DD to ease sorting]
 
-Release 1.1b1
+Release 3.1.0
+=============
+
+Mark Willson      2022-06-02  Merge changes from 1.1b3 ...
+Mark Willson      2022-06-02  contrib/tte.py: catch UnicodeDecodeError exception
+Mark Willson      2022-06-02  PKG-INFO: bump Metadata-Version and Version
+Mark Willson      2022-06-02  scripts/sb_server.py: declare state global in _recreateState()
+Mark Willson      2022-06-02  Added spambayes/asyncore.py and asynchat.py
+Mark Willson      2022-06-02  spambayes/Dibbler.py: move import of asyncore, asynchat
+Mark Willson      2022-06-02  spambayes/__init__.py: Update version information
+Mark Willson      2022-06-02  spambayes/optimize.py: clobber __version__
+Mark Willson      2022-06-02  spambayes/__init__.py: Update version information
+Mark Willson      2022-06-02  spambayes/test/test_sb_imapfilter.py: asyncore now in spambayes
+Mark Willson      2022-06-02  spambayes/test/test_sb_pop3dnd.py: asyncore now in spambayes
+Mark Willson      2022-06-02  spambayes/test/test_sb_server.py: asyncore now in spambayes
+Mark Willson      2022-06-02  spambayes/test/test_smtpproxy.py: asyncore now in spambayes
+Mark Willson      2022-06-02  spambayes/tokenizer.py: catch ValueError when parsing url in class URLStripper.tokenize()
+Mark Willson      2022-06-02  Deleted various files not in 1.1b3
+
+Release 3.0.0
+=============
+
+Mark Willson      2020-03-13  Partial conversion to Python 3: scripts/sb_filter.py, scripts/sb_mboxtrain.py and supporting modules have been lightly tested.
+
+Release 1.1a6
 =============
 
 Skip Montanaro    2008-12-06  Start requiring Python >= 2.4.
@@ -124,7 +148,7 @@ Tony Meyer        2005-01-02  UserInterface.py: cgi.escape the configuration fil
 Skip Montanaro    2005-01-02  tte.py: When running through the messages that haven't been kept for training, delete messages that score properly.
 Tony Meyer        2004-12-29  Outlook: Report the last modified date in the "show clues" message.
 Kenny Pitt        2004-12-24  New version numbering scheme.
-Tony Meyer        2004-12-23  Outlook: Enlarge the Manager dialog and add a control to set the ham folder. 
+Tony Meyer        2004-12-23  Outlook: Enlarge the Manager dialog and add a control to set the ham folder.
 Tony Meyer        2004-12-23  Provide constants for the persistent ham/spam/unsure stings for the messageinfo db.
 Kenny Pitt        2004-12-23  Add a button on the Statistics tab to reset the Outlook statistics.  Also display the date when the statistics were last reset.
 Tony Meyer        2004-12-22  Make Dibbler.py compatible with Python 2.2.1.
@@ -233,7 +257,7 @@ Tony Meyer        2004-08-10  Warn people using spam_cutoff/ham_cutoff values of
 Tony Meyer        2004-08-09  Change [Classifier] x-use_bigrams to a normal, not experimental option.
 Tony Meyer        2004-08-06  imapfilter: isinstance check is wrong, so will never be true, so literals in the folder list will never be handled correctly.
 Tony Meyer        2004-08-05  Remove all traces of the experimental imbalance option.
-Tony Meyer        2004-08-05  Remove support code for two deprecated options: [Tokenizer] x-extract_dow and [Tokenizer] x-generate_time_buckets. 
+Tony Meyer        2004-08-05  Remove support code for two deprecated options: [Tokenizer] x-extract_dow and [Tokenizer] x-generate_time_buckets.
 Tony Meyer        2004-08-04  Add basic unit tests for imapfilter.
 Tony Meyer        2004-08-04  Factor out X-Spambayes-Exception header code to message.py, and get imapfilter to use this.
 Tony Meyer        2004-08-04  imapfilter: Keep going if just one folder is bad (training/filtering).
@@ -354,7 +378,7 @@ Release 1.0 Alpha 9
 Skip Montanaro    2004-02-07  New script - tte.py: Train to exhaustion based upon my understanding of the technique as described in Gary Robinson's blog.
 Tony Meyer        2004-02-05  Web interface: added a third configuration page, which dynamically has all the experimental options (not the deprecated ones).
 Tony Meyer        2004-02-05  Make all the scripts consistent in their command line setting of database type/name.  -d is dbm, -p is pickle.  Also setup things nicer for mysql and pgsql.
-Tony Meyer        2004-02-05  If the allowed values for an option is a tuple of values, then the type is correct if the value is one of those types. 
+Tony Meyer        2004-02-05  If the allowed values for an option is a tuple of values, then the type is correct if the value is one of those types.
 Tony Meyer        2004-02-05  Outlook: If the special folders can't be found, then report this to the user.
 Tony Meyer        2004-02-05  ProxyUI: Do the save one line earlier, which might mean that if the user has closed the browser, a db error is avoided.
 Tony Meyer        2004-02-05  imapfilter has been adding two mailid headers, so stop that.
@@ -431,7 +455,7 @@ Tony Meyer        2003-12-22  Web interface: A beginning at a more userfriendly 
 Mark Hammond      2003-12-22  Outlook: When a frozen executable, addin.py becomes a mini-installer EXE for the DLL.
 Mark Hammond      2003-12-21  Outlook: DWhen doing a "batch train" (eg, selecting multiple messages and saying "Delete as" or "Recover from",) the DB was saved in between each and every message.  Now only saved at the end (which was always the intent)
 Mark Hammond      2003-12-21  Outlook: DAs part of checking our configuration is invalid, make sure the user hasn't set us up such that either Spam/Unsure folders isn't also being watched for new messages
-Mark Hammond      2003-12-21  Outlook: If the user attempts to close the Manager dialog while there is a problem preventing us being enabled, confirm they really want to close it 
+Mark Hammond      2003-12-21  Outlook: If the user attempts to close the Manager dialog while there is a problem preventing us being enabled, confirm they really want to close it
 Mark Hammond      2003-12-20  dump_props.py: Add -c option, which writes output to the Windows clipboard.
 Mark Hammond      2003-12-20  Outlook: Include the foldername in many messages, so help track down wierd bugs from user logs.  Say what we are watching a folder for.
 Mark Hammond      2003-12-20  Outlook: Fix [ 860410 ] SpamBayes allows top-level folders to be selected, and also prevent a single-select dialog from closing with no selection
@@ -590,7 +614,7 @@ Tim Peters        2003-09-12  Outlook: ShowClues():  Add lines revealing the # h
 Tony Meyer        2003-09-11  When running setup.py if the old (named) files exist, offer to delete them.
 Tony Meyer        2003-09-11  Add a unittest to check that we correctly fail when no dbm modules are available.
 Anthony Baxter    2003-09-11  Add a new file: NEWTRICKS.TXT to record ideas that have and haven't been tried.
-Richie Hindle     2003-09-11  Bug 803501: Fix the "No dbm modules available" message to print rather than crash. 
+Richie Hindle     2003-09-11  Bug 803501: Fix the "No dbm modules available" message to print rather than crash.
 Skip Montanaro    2003-09-11  Implement a better fix for the storage.py pickle/dbm problems.
 Mark Hammond      2003-09-10  Outlook: use the classifier's (new) store method rather than an Outlook specific one.
 Tony Meyer        2003-09-10  Re-fix storage.py so that hammie works with a pickle or dbm.
@@ -621,7 +645,7 @@ Tony Meyer     2003-09-02  Add a rough autoconfigure script, which will set up b
 Richie Hindle  2003-09-01  Fix [ 797890 ] "assert hamcount <= nham" problem.
 Tony Meyer     2003-09-01  Fix [ spambayes-Bugs-796996 ] SMTP server not started until restart.
 Richie Hindle  2003-09-01  Integrated [ 791393 ] HTTP Authentication, which closes #791319.
-Tony Meyer     2003-09-01  Added [ 796832 ] Word query should show all words starting with certain text 
+Tony Meyer     2003-09-01  Added [ 796832 ] Word query should show all words starting with certain text
 Tony Meyer     2003-09-01  Fix for [ 797316 ] Extra CRLF to SMTP server causes garbage error.
 Richie Hindle  2003-08-31  The web UI's Shutdown command, and stopping the pop3proxy_service, now wait for any open proxy connections to finish before exiting the process.
 Richie Hindle  2003-08-31  X-Spambayes-Exception headers now contain a traceback as well as the exception.
@@ -816,7 +840,7 @@ Tony Meyer	2003-05-26	Fix SF#737986 ('Message.as_string() fails.').
 Tony Meyer	2003-05-26	Restore notate_to and notate_subject functionality to pop3proxy.
 Tony Meyer	2003-05-25	Expose experimental ham/spam imbalance option to pop3proxy/imapfilter users
 Tim Peters	2003-05-25	Restore __slots__ declaration to WordInfo object in classifier.py
-Tim Peters	2003-05-25	PickledClassifier.load():  use getstate/setstate to copy the state. 
+Tim Peters	2003-05-25	PickledClassifier.load():  use getstate/setstate to copy the state.
 Tony Meyer	2003-05-21	Cosmetic changes to pop3proxy and imapfilter interface.
 Tony Meyer	2003-05-21	"Remove the ""account for string nham/nspam"" code in classifier."
 Tim Peters	2003-05-19	Catch BoundaryError when parsing messages.

@@ -48,7 +48,7 @@ class IMAPMessageTest(unittest.TestCase):
         headers = msg.getHeaders(True)
         for k, v in correct_msg.items():
             self.assertEqual(headers[k.lower()], v)
-        
+
     def testGetIndividualHeaders(self):
         msg = email.message_from_string(good1, _class=IMAPMessage)
         correct_msg = email.message_from_string(good1)
@@ -206,7 +206,7 @@ class IMAPFileMessageFactoryTest(unittest.TestCase):
         self.assertEqual(msg.id, key)
         self.assert_(isinstance(msg, type(IMAPFileMessage())))
 
-        
+
 def suite():
     suite = unittest.TestSuite()
     for cls in (IMAPMessageTest,
@@ -218,7 +218,7 @@ def suite():
 
 if __name__=='__main__':
     def runTestServer():
-        import asyncore
+        from spambayes import asyncore
         asyncore.loop()
     TestListener()
     thread.start_new_thread(runTestServer, ())

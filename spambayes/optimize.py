@@ -1,5 +1,5 @@
 #
-__version__ = '$Id: optimize.py 3232 2009-01-27 12:31:49Z montanaro $'
+__version__ = '$Id$'
 #
 # Optimize any parametric function.
 #
