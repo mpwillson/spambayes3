@@ -1,7 +1,7 @@
 # Spambayes3 - Python 3 version of spambayes
 
 An attempt to port the sadly neglected spambayes spam analysis
-software to Python 3.  The migration is based on spambasyes-1.1a6, the
+software to Python 3.  The migration was based on spambasyes-1.1a6, the
 latest version available (as far as I can tell).
 
 ## Progress
@@ -9,9 +9,17 @@ latest version available (as far as I can tell).
 scripts/sb_filter.py, scripts/sb_mboxtrain.py and the supporting
 modules have been convertered to Python 3 and lightly tested.
 
+### Update to 1.1b3 [2022-06-04]
+
+Merged in updates from a later spambayes release (1.1b3). This later
+version was located by ajschorr.
+
+No additional code has been converted to Python 3.
+
 # Original README.TXT
 
-Copyright (C) 2002-2007 Python Software Foundation; All Rights Reserved
+Copyright (C) 2002-2007 Python Software Foundation; All Rights
+Reserved
 
 The Python Software Foundation (PSF) holds copyright on all material
 in this project.  You may use it under the terms of the PSF license;
@@ -48,7 +56,7 @@ Prerequisites
 
 You need to have Python 2.2 or later (2.3 is recommended).  You can
 download Python from <http://www.python.org/download/>.
-Many distributions of UNIX now ship with Python - try typing 'python' 
+Many distributions of UNIX now ship with Python - try typing 'python'
 at a shell prompt.
 
 You also need version 2.4.3 or above of the Python "email" package.
@@ -95,7 +103,7 @@ Installation
 
 The first thing you need to do is run "python setup.py install" in the
 directory that you expanded the SpamBayes archive into (to do this, you
-probably need to open up a console window/command prompt/DOS prompt, 
+probably need to open up a console window/command prompt/DOS prompt,
 and navigate to the appropriate directory with the "cd" command).  This
 will install all the files that you need into the correct locations.
 After this, you can delete that directory; it is no longer required.
@@ -385,7 +393,7 @@ deletion and a new copy is made) on the server.  The messages will be
 identical to the original, except that they will include an additional
 header, so that SpamBayes can keep track of which messages have already
 been processed.
-                                           
+
 
 Command-line training
 ---------------------
