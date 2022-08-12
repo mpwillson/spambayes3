@@ -156,7 +156,7 @@ def maildir_train(h, path, is_spam, force, removetrained):
 
 def mbox_factory(f):
     """Return mbox messages as EmailMessage"""
-    
+
     return email.message_from_binary_file(f,policy=email.policy.default)
 
 def mbox_train(h, path, is_spam, force):
@@ -169,16 +169,16 @@ def mbox_train(h, path, is_spam, force):
 
     mbox = mailbox.mbox(path,factory=mbox_factory,create=False)
     mbox.lock()
-    
-    counter = 0
+
+    counter = -1
     trained = 0
+    malformed = []
 
     for key,msg in mbox.items():
-        if not msg:
-            print("Malformed message number %d.  "
-                  "I can't train on this mbox, sorry." % counter)
-            return
         counter += 1
+        if not msg:
+            malformed.append(counter)
+            continue
         if loud and counter % 10 == 0:
             sys.stdout.write("\r%6d" % counter)
             sys.stdout.flush()
@@ -187,11 +187,20 @@ def mbox_train(h, path, is_spam, force):
         if options["Headers", "include_trained"]:
             mbox.update({key: msg})
     mbox.close()
-    
+
     if loud:
         sys.stdout.write("\r%6d" % counter)
         sys.stdout.write("\r  Trained %d out of %d messages\n" %
                          (trained, counter))
+        nmalformed = len(malformed)
+        if nmalformed != 0:
+            sys.stdout.write("\r  Encountered %d malformed messages: " %
+                             (nmalformed,))
+            print('[', end='')
+            for i in range(nmalformed):
+                print(malformed[i], end='' if i == nmalformed-1 else ',')
+            print(']')
+    return
 
 def mhdir_train(h, path, is_spam, force):
     """Train bayes with an mh directory"""
