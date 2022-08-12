@@ -196,10 +196,7 @@ def mbox_train(h, path, is_spam, force):
         if nmalformed != 0:
             sys.stdout.write("\r  Encountered %d malformed messages: " %
                              (nmalformed,))
-            print('[', end='')
-            for i in range(nmalformed):
-                print(malformed[i], end='' if i == nmalformed-1 else ',')
-            print(']')
+            print('[%s]'%(','.join([str(i) for i in malformed])),)
     return
 
 def mhdir_train(h, path, is_spam, force):
