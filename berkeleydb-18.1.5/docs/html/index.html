@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Python Bindings for Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package" href="introduction.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="python-bindings-for-oracle-berkeley-db-4-8-5-3-6-2-and-18-1">
+<h1>Python Bindings for Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1<a class="headerlink" href="#python-bindings-for-oracle-berkeley-db-4-8-5-3-6-2-and-18-1" title="Permalink to this headline">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This handcrafted package contains Python wrappers for <a class="reference external" href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">Oracle Berkeley DB</a>,
+the Open Source embedded database system. Oracle Berkeley DB is a programmatic
+toolkit that provides high-performance built-in database support for
+desktop and server applications.</p>
+<p>The Oracle Berkeley DB access methods include B+tree, Extended Linear Hashing,
+Fixed and Variable-length records, and Queues. Oracle Berkeley DB provides full
+transactional support, database recovery, online backups, multi-threaded
+and multi-process access, etc.</p>
+<p>The Python wrappers allow you to store Python string objects of any
+length, keyed either by strings or integers depending on the database
+access method. With the use of another module in the package standard
+shelve-like functionality is provided allowing you to store any
+picklable Python object!</p>
+<p>Oracle Berkeley DB is very powerful and versatile, but it is complex to
+use correctly. <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/toc.htm">Oracle documentation</a> is very
+complete. Please, review it.</p>
+<p>Since June 2013 (release 6.0.0), this project accepts donations. Please,
+contribute if you can. <a class="reference internal" href="donate.html"><span class="doc">Details</span></a>.</p>
+</section>
+<section id="documentation-index">
+<h2>Documentation Index<a class="headerlink" href="#documentation-index" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#types-provided">Types Provided</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#top-level-functions">Top level functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#exceptions-provided">Exceptions Provided</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#other-package-modules">Other Package Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbenv.html#dbenv-attributes">DBEnv Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbenv.html#dbenv-methods">DBEnv Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbenv.html#dbenv-replication-manager-methods">DBEnv Replication Manager Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbenv.html#dbenv-replication-methods">DBEnv Replication Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="db.html#db-methods">DB Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html#db-mapping-and-compatibility-methods">DB Mapping and Compatibility Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbcursor.html#dbcursor-methods">DBCursor Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbcursor.html#dbcursor-get-methods">DBCursor Get Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dblogcursor.html#dblogcursor-methods">DBLogCursor Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dblogcursor.html#dblogcursor-get-methods">DBLogCursor Get Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbtxn.html#dbtxn-methods">DBTxn Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbsequence.html#dbsequence-methods">DBSequence Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbsite.html#dbsite-methods">DBSite Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">18.1.5 - 2022-01-21:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id2">18.1.4 - 2021-05-19:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id3">18.1.3 - 2021-05-19:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id4">18.1.2 - 2020-12-07:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id5">18.1.1 - 2020-12-01:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id6">18.1.0 - 2020-11-12:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#pre">18.1.0-pre:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id1">6.2.9 - 2020-11-26:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id2">6.2.8 - 2020-11-20:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id3">6.2.7:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id4">6.2.6:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id5">6.2.5:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id6">6.2.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id7">6.2.3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id8">6.2.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id9">6.2.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id10">6.2.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id11">6.1.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id12">6.1.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id13">6.0.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id14">6.0.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id15">5.3.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id16">5.2.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id17">5.1.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id18">5.1.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id19">5.1.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id20">5.0.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id21">4.8.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id22">4.8.3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id23">4.8.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id24">4.8.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id25">4.8.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id26">4.7.6:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id27">4.7.5:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id28">4.7.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#python-2-6-release-first-release-with-python-3-0-support">4.7.3: (Python 2.6 release. First release with Python 3.0 support)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id29">4.7.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id30">4.7.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id31">4.7.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id32">4.6.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id33">4.6.3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id34">4.6.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#first-release-from-jesus-cea-avion">4.6.1: (first release from Jesús Cea Avión)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id35">4.6.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id36">4.5.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id37">4.4.5:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id38">4.4.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id39">4.4.3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id40">4.4.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id41">4.4.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id42">4.4.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id43">4.3.3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id44">4.3.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id45">4.3.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id46">4.3.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id47">4.2.9:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id48">4.2.8:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id49">4.2.7:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id50">4.2.6:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id51">4.2.5:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id52">4.2.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id53">4.2.3:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id54">4.2.2:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id55">4.2.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id56">4.2.0:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#x">4.1.x:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id57">4.1.6:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id58">4.1.5:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id59">4.1.4:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id60">4.1.3 - 2003-02-02:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id61">4.1.2 - 2003-01-17:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id62">4.1.1 - 2002-12-20:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id63">4.1.0 - 2002-12-13:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id64">3.4.3 - 2002-10-18:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id65">3.4.2 - 2002-08-14:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id66">3.4.1:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog-bsddb3.html#id67">3.4.0:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#license-text-bsd-3-clause-license">License Text (BSD 3-Clause License)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#license-of-individual-files">License of individual files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-of-python-files">License of Python files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-of-c-files">License of C files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="introduction.html" title="next chapter">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

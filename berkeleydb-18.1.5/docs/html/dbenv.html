@@ -1,0 +1,2119 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DBEnv &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DB" href="db.html" />
+    <link rel="prev" title="Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package" href="introduction.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dbenv">
+<h1>DBEnv<a class="headerlink" href="#dbenv" title="Permalink to this headline">¶</a></h1>
+<p>Read <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/programmer_reference/index.html">Oracle documentation</a>
+for better understanding.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/env.html">More info…</a></p>
+<section id="dbenv-attributes">
+<h2>DBEnv Attributes<a class="headerlink" href="#dbenv-attributes" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="DBEnv">
+<span class="sig-name descname"><span class="pre">DBEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DBEnv" title="Permalink to this definition">¶</a></dt>
+<dd><p>database home directory (read-only)</p>
+</dd></dl>
+
+</section>
+<section id="dbenv-methods">
+<h2>DBEnv Methods<a class="headerlink" href="#dbenv-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">DBEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envcreate.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the database environment, freeing resources.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envclose.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">homedir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode=0660</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare the database environment for use.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envopen.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_cursor">
+<span class="sig-name descname"><span class="pre">log_cursor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#log_cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a created log cursor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logcursor.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="memp_stat">
+<span class="sig-name descname"><span class="pre">memp_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memp_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the memory pool (that is, the buffer cache) subsystem
+statistics.</p>
+<p>The returning value is a tuple. The first element is a dictionary
+with the general stats. The second element is another dictionary,
+keyed by filename, and the values are the stats for each file.</p>
+<p>The first dictionary contains these data:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>gbytes</p></td>
+<td><p>Gigabytes of cache (total cache size is
+st_gbytes + st_bytes).</p></td>
+</tr>
+<tr class="row-even"><td><p>bytes</p></td>
+<td><p>Bytes of cache (total cache size is
+st_gbytes + st_bytes).</p></td>
+</tr>
+<tr class="row-odd"><td><p>ncache</p></td>
+<td><p>Number of caches.</p></td>
+</tr>
+<tr class="row-even"><td><p>max_ncache</p></td>
+<td><p>Maximum number of caches, as configured
+with the DB_ENV-&gt;set_cache_max() method.</p></td>
+</tr>
+<tr class="row-odd"><td><p>regsize</p></td>
+<td><p>Individual cache size, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p>mmapsize</p></td>
+<td><p>Maximum memory-mapped file size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxopenfd</p></td>
+<td><p>Maximum open file descriptors.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxwrite</p></td>
+<td><p>Maximum sequential buffer writes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxwrite_sleep</p></td>
+<td><p>Microseconds to pause after writing maximum
+sequential buffers.</p></td>
+</tr>
+<tr class="row-even"><td><p>map</p></td>
+<td><p>Requested pages mapped into the process’
+address space (there is no available
+information about whether or not this
+request caused disk I/O, although examining
+the application page fault rate may be
+helpful).</p></td>
+</tr>
+<tr class="row-odd"><td><p>cache_hit</p></td>
+<td><p>Requested pages found in the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>cache_miss</p></td>
+<td><p>Requested pages not found in the cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p>page_create</p></td>
+<td><p>Pages created in the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>page_in</p></td>
+<td><p>Pages read into the cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p>page_out</p></td>
+<td><p>Pages written from the cache to the backing
+file.</p></td>
+</tr>
+<tr class="row-even"><td><p>ro_evict</p></td>
+<td><p>Clean pages forced from the cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p>rw_evict</p></td>
+<td><p>Dirty pages forced from the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>page_trickle</p></td>
+<td><p>Dirty pages written using the
+DB_ENV-&gt;memp_trickle() method.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pages</p></td>
+<td><p>Pages in the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>page_clean</p></td>
+<td><p>Clean pages currently in the cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p>page_dirty</p></td>
+<td><p>Dirty pages currently in the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>hash_buckets</p></td>
+<td><p>Number of hash buckets in buffer hash
+table.</p></td>
+</tr>
+<tr class="row-odd"><td><p>hash_searches</p></td>
+<td><p>Total number of buffer hash table lookups.</p></td>
+</tr>
+<tr class="row-even"><td><p>hash_longest</p></td>
+<td><p>Longest chain ever encountered in buffer
+hash table lookups.</p></td>
+</tr>
+<tr class="row-odd"><td><p>hash_examined</p></td>
+<td><p>Total number of hash elements traversed
+during hash table lookups.</p></td>
+</tr>
+<tr class="row-even"><td><p>hash_nowait</p></td>
+<td><p>Number of times that a thread of control
+was able to obtain a hash bucket lock
+without waiting.</p></td>
+</tr>
+<tr class="row-odd"><td><p>hash_wait</p></td>
+<td><p>Number of times that a thread of control
+was forced to wait before obtaining a hash
+bucket lock.</p></td>
+</tr>
+<tr class="row-even"><td><p>hash_max_nowait</p></td>
+<td><p>The number of times a thread of control was
+able to obtain the hash bucket lock without
+waiting on the bucket which had the maximum
+number of times that a thread of control
+needed to wait.</p></td>
+</tr>
+<tr class="row-odd"><td><p>hash_max_wait</p></td>
+<td><p>Maximum number of times any hash bucket
+lock was waited for by a thread of control.</p></td>
+</tr>
+<tr class="row-even"><td><p>region_wait</p></td>
+<td><p>Number of times that a thread of control
+was forced to wait before obtaining a cache
+region mutex.</p></td>
+</tr>
+<tr class="row-odd"><td><p>region_nowait</p></td>
+<td><p>Number of times that a thread of control
+was able to obtain a cache region mutex
+without waiting.</p></td>
+</tr>
+<tr class="row-even"><td><p>mvcc_frozen</p></td>
+<td><p>Number of buffers frozen.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mvcc_thawed</p></td>
+<td><p>Number of buffers thawed.</p></td>
+</tr>
+<tr class="row-even"><td><p>mvcc_freed</p></td>
+<td><p>Number of frozen buffers freed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>alloc</p></td>
+<td><p>Number of page allocations.</p></td>
+</tr>
+<tr class="row-even"><td><p>alloc_buckets</p></td>
+<td><p>Number of hash buckets checked during
+allocation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>alloc_max_buckets</p></td>
+<td><p>Maximum number of hash buckets checked
+during an allocation.</p></td>
+</tr>
+<tr class="row-even"><td><p>alloc_pages</p></td>
+<td><p>Number of pages checked during allocation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>alloc_max_pages</p></td>
+<td><p>Maximum number of pages checked during an
+allocation.</p></td>
+</tr>
+<tr class="row-even"><td><p>io_wait</p></td>
+<td><p>Number of operations blocked waiting for
+I/O to complete.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sync_interrupted</p></td>
+<td><p>Number of mpool sync operations
+interrupted.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The second dictionary contains these data:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>pagesize</p></td>
+<td><p>Page size in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p>cache_hit</p></td>
+<td><p>Requested pages found in the cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cache_miss</p></td>
+<td><p>Requested pages not found in the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>map</p></td>
+<td><p>Requested pages mapped into the process’
+address space.</p></td>
+</tr>
+<tr class="row-odd"><td><p>page_create</p></td>
+<td><p>Pages created in the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>page_in</p></td>
+<td><p>Pages read into the cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p>page_out</p></td>
+<td><p>Pages written from the cache to the backing
+file.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="memp_stat_print">
+<span class="sig-name descname"><span class="pre">memp_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memp_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays cache subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempstat_print.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="memp_sync">
+<span class="sig-name descname"><span class="pre">memp_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lsn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memp_sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes modified pages in the cache to their backing files. If
+provided, lsn is a tuple: (file, offset).
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempsync.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="memp_trickle">
+<span class="sig-name descname"><span class="pre">memp_trickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memp_trickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures that a specified percent of the pages in the cache are clean,
+by writing dirty pages to their backing files.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/memptrickle.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">homedir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a database environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envremove.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbremove">
+<span class="sig-name descname"><span class="pre">dbremove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dbremove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the database specified by the file and database parameters.
+If no database is specified, the underlying file represented by file
+is removed, incidentally removing all of the databases it contained.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envdbremove.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbrename">
+<span class="sig-name descname"><span class="pre">dbrename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags=0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dbrename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames the database specified by the file and database parameters to
+newname. If no database is specified, the underlying file represented
+by file is renamed, incidentally renaming all of the databases it
+contained.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envdbrename.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="backup">
+<span class="sig-name descname"><span class="pre">backup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a hot backup of the open environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envbackup.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbbackup">
+<span class="sig-name descname"><span class="pre">dbbackup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dbbackup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a hot backup of a single database file contained
+within the environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envdbbackup.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_backup_config">
+<span class="sig-name descname"><span class="pre">get_backup_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_backup_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the value set for hot backup tuning parameters.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_backup_config.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_backup_config">
+<span class="sig-name descname"><span class="pre">set_backup_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_backup_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures tuning parameters for the hot backup APIs.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_backup_config.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fileid_reset">
+<span class="sig-name descname"><span class="pre">fileid_reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fileid_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>All databases contain an ID string used to identify the database in
+the database environment cache. If a physical database file is
+copied, and used in the same environment as another file with the
+same ID strings, corruption can occur. The DB_ENV-&gt;fileid_reset
+method creates new ID strings for all of the databases in the
+physical file.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envfileid_reset.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_thread_count">
+<span class="sig-name descname"><span class="pre">get_thread_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_thread_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the thread count as set by the DB_ENV-&gt;set_thread_count()
+method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_thread_count.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_thread_count">
+<span class="sig-name descname"><span class="pre">set_thread_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_thread_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declare an approximate number of threads in the database environment.
+The DB_ENV-&gt;set_thread_count() method must be called prior to opening
+the database environment if the DB_ENV-&gt;failchk() method will be
+used. The DB_ENV-&gt;set_thread_count() method does not set the maximum
+number of threads but is used to determine memory sizing and the
+thread control block reclamation policy.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_thread_count.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_encrypt">
+<span class="sig-name descname"><span class="pre">set_encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the password used by the Berkeley DB library to perform
+encryption and decryption.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_encrypt.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_encrypt_flags">
+<span class="sig-name descname"><span class="pre">get_encrypt_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_encrypt_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the encryption flags.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_encrypt_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_intermediate_dir_mode">
+<span class="sig-name descname"><span class="pre">get_intermediate_dir_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_intermediate_dir_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the intermediate directory permissions.</p>
+<p>Intermediate directories are directories needed for recovery.
+Normally, Berkeley DB does not create these directories and will do
+so only if the DB_ENV-&gt;set_intermediate_dir_mode() method is called.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_intermediate_dir_mode.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_intermediate_dir_mode">
+<span class="sig-name descname"><span class="pre">set_intermediate_dir_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_intermediate_dir_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default, Berkeley DB does not create intermediate directories
+needed for recovery, that is, if the file /a/b/c/mydatabase is being
+recovered, and the directory path b/c does not exist, recovery will
+fail. This default behavior is because Berkeley DB does not know what
+permissions are appropriate for intermediate directory creation, and
+creating the directory might result in a security problem.</p>
+<p>The DB_ENV-&gt;set_intermediate_dir_mode() method causes Berkeley DB to
+create any intermediate directories needed during recovery, using the
+specified permissions.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_intermediate_dir_mode.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_timeout">
+<span class="sig-name descname"><span class="pre">get_timeout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a timeout value, in microseconds.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_timeout.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_timeout">
+<span class="sig-name descname"><span class="pre">set_timeout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets timeout values for locks or transactions in the database
+environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_timeout.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_mp_max_openfd">
+<span class="sig-name descname"><span class="pre">get_mp_max_openfd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_mp_max_openfd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum number of file descriptors the library will open
+concurrently when flushing dirty pages from the cache.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempget_mp_max_openfd.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_mp_max_openfd">
+<span class="sig-name descname"><span class="pre">set_mp_max_openfd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_open_fd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_mp_max_openfd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limits the number of file descriptors the library will open
+concurrently when flushing dirty pages from the cache.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempset_mp_max_openfd.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_mp_max_write">
+<span class="sig-name descname"><span class="pre">get_mp_max_write</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_mp_max_write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the current maximum number of sequential write
+operations and microseconds to pause that the library can schedule
+when flushing dirty pages from the cache.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempget_mp_max_write.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_mp_max_write">
+<span class="sig-name descname"><span class="pre">set_mp_max_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxwrite</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxwrite_sleep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_mp_max_write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limits the number of sequential write operations scheduled by the
+library when flushing dirty pages from the cache.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mempset_mp_max_write.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_shm_key">
+<span class="sig-name descname"><span class="pre">set_shm_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_shm_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify a base segment ID for Berkeley DB environment shared memory
+regions created in system memory on VxWorks or systems supporting
+X/Open-style shared memory interfaces; for example, UNIX systems
+supporting shmget(2) and related System V IPC interfaces.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_shm_key.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_shm_key">
+<span class="sig-name descname"><span class="pre">get_shm_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_shm_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the base segment ID.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_shm_key.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_cache_max">
+<span class="sig-name descname"><span class="pre">set_cache_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gbytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_cache_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the maximum cache size, in bytes. The specified size is rounded
+to the nearest multiple of the cache region size, which is the
+initial cache size divided by the number of regions specified to the
+DB_ENV-&gt;set_cachesize() method. If no value is specified, it defaults
+to the initial cache size.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_cache_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_cache_max">
+<span class="sig-name descname"><span class="pre">get_cache_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_cache_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum size of the cache as set using the
+DB_ENV-&gt;set_cache_max() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_cache_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_cachesize">
+<span class="sig-name descname"><span class="pre">set_cachesize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gbytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_cachesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the size of the shared memory buffer pool.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_cachesize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_cachesize">
+<span class="sig-name descname"><span class="pre">get_cachesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_cachesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the current size and composition of the cache.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_cachesize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_data_dir">
+<span class="sig-name descname"><span class="pre">set_data_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the environment data directory. You can call this function
+multiple times, adding new directories.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_data_dir.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_data_dirs">
+<span class="sig-name descname"><span class="pre">get_data_dirs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_data_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple with the directories.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_data_dirs.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_flags">
+<span class="sig-name descname"><span class="pre">get_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the configuration flags set for a DB_ENV handle.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_flags">
+<span class="sig-name descname"><span class="pre">set_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onoff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set additional flags for the DBEnv. The onoff parameter specifes if
+the flag is set or cleared.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_tmp_dir">
+<span class="sig-name descname"><span class="pre">set_tmp_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_tmp_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the directory to be used for temporary files.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_tmp_dir.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_tmp_dir">
+<span class="sig-name descname"><span class="pre">get_tmp_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_tmp_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the database environment temporary file directory.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_tmp_dir.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_get_returns_none">
+<span class="sig-name descname"><span class="pre">set_get_returns_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_get_returns_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default when DB.get or DBCursor.get, get_both, first, last, next
+or prev encounter a DB_NOTFOUND error they return None instead of
+raising DBNotFoundError. This behaviour emulates Python dictionaries
+and is convenient for looping.</p>
+<p>You can use this method to toggle that behaviour for all of the
+aformentioned methods or extend it to also apply to the DBCursor.set,
+set_both, set_range, and set_recno methods. Supported values of
+flag:</p>
+<ul class="simple">
+<li><p><strong>0</strong> all DB and DBCursor get and set methods will raise a
+DBNotFoundError rather than returning None.</p></li>
+<li><p><strong>1</strong> <em>Default in module version &lt;4.2.4</em>  The DB.get and
+DBCursor.get, get_both, first, last, next and prev methods return
+None.</p></li>
+<li><p><strong>2</strong> <em>Default in module version &gt;=4.2.4</em> Extends the behaviour of
+<strong>1</strong> to the DBCursor set, set_both, set_range and set_recno
+methods.</p></li>
+</ul>
+<p>The default of returning None makes it easy to do things like this
+without having to catch DBNotFoundError (KeyError):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">mydb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">doSomething</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">rec</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="n">rec</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Making the cursor set methods return None is useful in order to do
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span> <span class="o">=</span> <span class="n">mydb</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">rec</span><span class="p">:</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">rec</span>
+    <span class="n">doSomething</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">mydb</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The downside to this it that it is inconsistent with the rest of the
+package and noticeably diverges from the Oracle Berkeley DB API. If
+you prefer to have the get and set methods raise an exception when a
+key is not found, use this method to tell them to do so.</p>
+<p>Calling this method on a DBEnv object will set the default for all
+DB’s later created within that environment. Calling it on a DB
+object sets the behaviour for that DB only.</p>
+<p>The previous setting is returned.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_private">
+<span class="sig-name descname"><span class="pre">set_private</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_private" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link an object to the DBEnv object. This allows to pass around an
+arbitrary object. For instance, for callback context.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_private">
+<span class="sig-name descname"><span class="pre">get_private</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_private" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the object linked to the DBEnv.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_open_flags">
+<span class="sig-name descname"><span class="pre">get_open_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_open_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current open method flags. That is, this method returns
+the flags that were specified when DB_ENV-&gt;open() was called.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_open_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lg_filemode">
+<span class="sig-name descname"><span class="pre">get_lg_filemode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lg_filemode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log file mode.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lg_filemode.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lg_filemode">
+<span class="sig-name descname"><span class="pre">set_lg_filemode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filemode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lg_filemode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the absolute file mode for created log files.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lg_filemode.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lg_bsize">
+<span class="sig-name descname"><span class="pre">get_lg_bsize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lg_bsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the size of the log buffer, in bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lg_bsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lg_bsize">
+<span class="sig-name descname"><span class="pre">set_lg_bsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lg_bsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the size of the in-memory log buffer, in bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lg_bsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lg_dir">
+<span class="sig-name descname"><span class="pre">get_lg_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lg_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log directory, which is the location for logging files.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lg_dir.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lg_dir">
+<span class="sig-name descname"><span class="pre">set_lg_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lg_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path of a directory to be used as the location of logging files.
+Log files created by the Log Manager subsystem will be created in
+this directory.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lg_dir.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lg_max">
+<span class="sig-name descname"><span class="pre">set_lg_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lg_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the maximum size of a single file in the log, in bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lg_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lg_max">
+<span class="sig-name descname"><span class="pre">get_lg_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_lg_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum log file size.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lg_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lg_regionmax">
+<span class="sig-name descname"><span class="pre">get_lg_regionmax</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lg_regionmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the size of the underlying logging subsystem region.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lg_regionmax.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lg_regionmax">
+<span class="sig-name descname"><span class="pre">set_lg_regionmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lg_regionmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the maximum size of a single region in the log, in bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lg_regionmax.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lk_partitions">
+<span class="sig-name descname"><span class="pre">get_lk_partitions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lk_partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of lock table partitions used in the Berkeley DB
+environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lk_partitions.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lk_partitions">
+<span class="sig-name descname"><span class="pre">set_lk_partitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partitions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lk_partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number of lock table partitions in the Berkeley DB
+environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lk_partitions.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lk_detect">
+<span class="sig-name descname"><span class="pre">get_lk_detect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lk_detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the deadlock detector configuration.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lk_detect.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lk_detect">
+<span class="sig-name descname"><span class="pre">set_lk_detect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lk_detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the automatic deadlock detection mode.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lk_detect.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lk_max_locks">
+<span class="sig-name descname"><span class="pre">get_lk_max_locks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lk_max_locks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum number of potential locks.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lk_max_locks.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lk_max_locks">
+<span class="sig-name descname"><span class="pre">set_lk_max_locks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lk_max_locks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the maximum number of locks supported by the Berkeley DB lock
+subsystem.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lk_max_locks.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lk_max_lockers">
+<span class="sig-name descname"><span class="pre">get_lk_max_lockers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lk_max_lockers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum number of potential lockers.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lk_max_lockers.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lk_max_lockers">
+<span class="sig-name descname"><span class="pre">set_lk_max_lockers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lk_max_lockers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the maximum number of simultaneous locking entities supported by
+the Berkeley DB lock subsystem.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lk_max_lockers.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lk_max_objects">
+<span class="sig-name descname"><span class="pre">get_lk_max_objects</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lk_max_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum number of locked objects.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_lk_max_objects.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lk_max_objects">
+<span class="sig-name descname"><span class="pre">set_lk_max_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lk_max_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the maximum number of simultaneously locked objects supported by
+the Berkeley DB lock subsystem.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_lk_max_lockers.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_mp_mmapsize">
+<span class="sig-name descname"><span class="pre">get_mp_mmapsize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_mp_mmapsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the the maximum file size, in bytes, for a file to be mapped
+into the process address space.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_mp_mmapsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_mp_mmapsize">
+<span class="sig-name descname"><span class="pre">set_mp_mmapsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_mp_mmapsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Files that are opened read-only in the memory pool (and that satisfy
+a few other criteria) are, by default, mapped into the process
+address space instead of being copied into the local cache. This can
+result in better-than-usual performance, as available virtual memory
+is normally much larger than the local cache, and page faults are
+faster than page copying on many systems. However, in the presence
+of limited virtual memory it can cause resource starvation, and in
+the presence of large databases, it can result in immense process
+sizes.</p>
+<p>This method sets the maximum file size, in bytes, for a file to be
+mapped into the process address space. If no value is specified, it
+defaults to 10MB.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_mp_mmapsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stat_print">
+<span class="sig-name descname"><span class="pre">stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the default subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_file">
+<span class="sig-name descname"><span class="pre">log_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lsn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maps lsn to filenames, returning the name of the file
+containing the named record.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logfile.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_printf">
+<span class="sig-name descname"><span class="pre">log_printf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_printf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends an informational message to the Berkeley DB database
+environment log files.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logprintf.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_archive">
+<span class="sig-name descname"><span class="pre">log_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of log or database file names. By default,
+log_archive returns the names of all of the log files that are no
+longer in use (e.g., no longer involved in active transactions), and
+that may safely be archived for catastrophic recovery and then
+removed from the system.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logarchive.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_flush">
+<span class="sig-name descname"><span class="pre">log_flush</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lsn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force log records to disk. Useful if the environment, database
+or transactions are used as ACI, instead of ACID. For example,
+if the environment is opened as DB_TXN_NOSYNC. If provided, lsn
+is a tuple: (file, offset)
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logflush.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_get_config">
+<span class="sig-name descname"><span class="pre">log_get_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the specified which parameter is currently set or
+not. You can manage this value using the DB_ENV-&gt;log_set_config()
+method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envlog_get_config.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_set_config">
+<span class="sig-name descname"><span class="pre">log_set_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onoff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_set_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures the Berkeley DB logging subsystem.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envlog_set_config.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_detect">
+<span class="sig-name descname"><span class="pre">lock_detect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lock_detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run one iteration of the deadlock detector, returns the number of
+transactions aborted.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockdetect.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_get">
+<span class="sig-name descname"><span class="pre">lock_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locker</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lock_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquires a lock and returns a handle to it as a DBLock object. The
+locker parameter is an integer representing the entity doing the
+locking, and obj is an object representing the item to be locked.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockget.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_id">
+<span class="sig-name descname"><span class="pre">lock_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lock_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquires a locker id, guaranteed to be unique across all threads and
+processes that have the DBEnv open.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockid.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_id_free">
+<span class="sig-name descname"><span class="pre">lock_id_free</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lock_id_free" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frees a locker ID allocated by the “dbenv.lock_id()” method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockid_free.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_put">
+<span class="sig-name descname"><span class="pre">lock_put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lock_put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release the lock.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockput.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_stat">
+<span class="sig-name descname"><span class="pre">lock_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lock_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of locking subsystem statistics with the
+following keys:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>id</p></td>
+<td><p>Last allocated lock ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>cur_maxid</p></td>
+<td><p>The current maximum unused locker ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nmodes</p></td>
+<td><p>Number of lock modes.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxlocks</p></td>
+<td><p>Maximum number of locks possible.</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxlockers</p></td>
+<td><p>Maximum number of lockers possible.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxobjects</p></td>
+<td><p>Maximum number of objects possible.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nlocks</p></td>
+<td><p>Number of current locks.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxnlocks</p></td>
+<td><p>Maximum number of locks at once.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nlockers</p></td>
+<td><p>Number of current lockers.</p></td>
+</tr>
+<tr class="row-even"><td><p>nobjects</p></td>
+<td><p>Number of current lock objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxnobjects</p></td>
+<td><p>Maximum number of lock objects at once.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxnlockers</p></td>
+<td><p>Maximum number of lockers at once.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nrequests</p></td>
+<td><p>Total number of locks requested.</p></td>
+</tr>
+<tr class="row-even"><td><p>nreleases</p></td>
+<td><p>Total number of locks released.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nupgrade</p></td>
+<td><p>Total number of locks upgraded.</p></td>
+</tr>
+<tr class="row-even"><td><p>ndowngrade</p></td>
+<td><p>Total number of locks downgraded.</p></td>
+</tr>
+<tr class="row-odd"><td><p>lock_wait</p></td>
+<td><p>The number of lock requests not immediately
+available due to conflicts, for which the
+thread of control waited.</p></td>
+</tr>
+<tr class="row-even"><td><p>lock_nowait</p></td>
+<td><p>The number of lock requests not immediately
+available due to conflicts, for which the
+thread of control did not wait.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ndeadlocks</p></td>
+<td><p>Number of deadlocks.</p></td>
+</tr>
+<tr class="row-even"><td><p>locktimeout</p></td>
+<td><p>Lock timeout value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nlocktimeouts</p></td>
+<td><p>The number of lock requests that have timed
+out.</p></td>
+</tr>
+<tr class="row-even"><td><p>txntimeout</p></td>
+<td><p>Transaction timeout value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ntxntimeouts</p></td>
+<td><p>The number of transactions that have timed
+out. This value is also a component of
+ndeadlocks, the total number of deadlocks
+detected.</p></td>
+</tr>
+<tr class="row-even"><td><p>objs_wait</p></td>
+<td><p>The number of requests to allocate or
+deallocate an object for which the thread
+of control waited.</p></td>
+</tr>
+<tr class="row-odd"><td><p>objs_nowait</p></td>
+<td><p>The number of requests to allocate or
+deallocate an object for which the thread
+of control did not wait.</p></td>
+</tr>
+<tr class="row-even"><td><p>lockers_wait</p></td>
+<td><p>The number of requests to allocate or
+deallocate a locker for which the thread of
+control waited.</p></td>
+</tr>
+<tr class="row-odd"><td><p>lockers_nowait</p></td>
+<td><p>The number of requests to allocate or
+deallocate a locker for which the thread of
+control did not wait.</p></td>
+</tr>
+<tr class="row-even"><td><p>locks_wait</p></td>
+<td><p>The number of requests to allocate or
+deallocate a lock structure for which the
+thread of control waited.</p></td>
+</tr>
+<tr class="row-odd"><td><p>locks_nowait</p></td>
+<td><p>The number of requests to allocate or
+deallocate a lock structure for which the
+thread of control did not wait.</p></td>
+</tr>
+<tr class="row-even"><td><p>hash_len</p></td>
+<td><p>Maximum length of a lock hash bucket.</p></td>
+</tr>
+<tr class="row-odd"><td><p>regsize</p></td>
+<td><p>Size of the region.</p></td>
+</tr>
+<tr class="row-even"><td><p>region_wait</p></td>
+<td><p>Number of times a thread of control was
+forced to wait before obtaining the region
+lock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>region_nowait</p></td>
+<td><p>Number of times a thread of control was
+able to obtain the region lock  without
+waiting.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lock_stat_print">
+<span class="sig-name descname"><span class="pre">lock_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lock_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the locking subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/lockstat_print.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cdsgroup_begin">
+<span class="sig-name descname"><span class="pre">cdsgroup_begin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdsgroup_begin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a DBTxn object referring to a new Berkeley DB
+Concurrent Data Store group. This creates a locker ID that is
+shared by all cursors opened in the group.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envcdsgroup_begin.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_tx_max">
+<span class="sig-name descname"><span class="pre">get_tx_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_tx_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of active transactions.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_tx_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_tx_max">
+<span class="sig-name descname"><span class="pre">set_tx_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_tx_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the maximum number of active transactions.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_tx_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_tx_timestamp">
+<span class="sig-name descname"><span class="pre">get_tx_timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_tx_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the recovery timestamp.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_tx_timestamp.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_tx_timestamp">
+<span class="sig-name descname"><span class="pre">set_tx_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_tx_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recover to the time specified by timestamp rather than to the most
+current possible date.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_tx_timestamp.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="txn_begin">
+<span class="sig-name descname"><span class="pre">txn_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#txn_begin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and begins a new transaction. A DBTxn object is returned.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnbegin.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="txn_checkpoint">
+<span class="sig-name descname"><span class="pre">txn_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kbyte</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#txn_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes the underlying memory pool, writes a checkpoint record to the
+log and then flushes the log.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txncheckpoint.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="txn_stat">
+<span class="sig-name descname"><span class="pre">txn_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#txn_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary of transaction statistics with the following
+keys:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>last_ckp</p></td>
+<td><p>The LSN of the last checkpoint.</p></td>
+</tr>
+<tr class="row-even"><td><p>time_ckp</p></td>
+<td><p>Time the last completed checkpoint finished
+(as the number of seconds since the Epoch,
+returned by the IEEE/ANSI Std 1003.1 POSIX
+time interface).</p></td>
+</tr>
+<tr class="row-odd"><td><p>last_txnid</p></td>
+<td><p>Last transaction ID allocated.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxtxns</p></td>
+<td><p>Max number of active transactions possible.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nactive</p></td>
+<td><p>Number of transactions currently active.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxnactive</p></td>
+<td><p>Max number of active transactions at once.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nsnapshot</p></td>
+<td><p>The number of transactions on the snapshot
+list. These are transactions which modified
+a database opened with DB_MULTIVERSION, and
+which have committed or aborted, but the
+copies of pages they created are still in
+the cache.</p></td>
+</tr>
+<tr class="row-even"><td><p>maxnsnapshot</p></td>
+<td><p>The maximum number of transactions on the
+snapshot list at any one time.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nbegins</p></td>
+<td><p>Number of transactions that have begun.</p></td>
+</tr>
+<tr class="row-even"><td><p>naborts</p></td>
+<td><p>Number of transactions that have aborted.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ncommits</p></td>
+<td><p>Number of transactions that have committed.</p></td>
+</tr>
+<tr class="row-even"><td><p>nrestores</p></td>
+<td><p>Number of transactions that have been
+restored.</p></td>
+</tr>
+<tr class="row-odd"><td><p>regsize</p></td>
+<td><p>Size of the region.</p></td>
+</tr>
+<tr class="row-even"><td><p>region_wait</p></td>
+<td><p>Number of times that a thread of control
+was forced to wait before obtaining the
+region lock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>region_nowait</p></td>
+<td><p>Number of times that a thread of control
+was able to obtain the region lock without
+waiting.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="txn_stat_print">
+<span class="sig-name descname"><span class="pre">txn_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#txn_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the transaction subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnstat_print.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lsn_reset">
+<span class="sig-name descname"><span class="pre">lsn_reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsn_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method allows database files to be moved from one transactional
+database environment to another.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envlsn_reset.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_stat">
+<span class="sig-name descname"><span class="pre">log_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of logging subsystem statistics with the
+following keys:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>magic</p></td>
+<td><p>The magic number that identifies a file as
+a log file.</p></td>
+</tr>
+<tr class="row-even"><td><p>version</p></td>
+<td><p>The version of the log file type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mode</p></td>
+<td><p>The mode of any created log files.</p></td>
+</tr>
+<tr class="row-even"><td><p>lg_bsize</p></td>
+<td><p>The in-memory log record cache size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>lg_size</p></td>
+<td><p>The log file size.</p></td>
+</tr>
+<tr class="row-even"><td><p>record</p></td>
+<td><p>The number of records written to this log.</p></td>
+</tr>
+<tr class="row-odd"><td><p>w_mbytes</p></td>
+<td><p>The number of megabytes written to this
+log.</p></td>
+</tr>
+<tr class="row-even"><td><p>w_bytes</p></td>
+<td><p>The number of bytes over and above w_mbytes
+written to this log.</p></td>
+</tr>
+<tr class="row-odd"><td><p>wc_mbytes</p></td>
+<td><p>The number of megabytes written to this log
+since the last checkpoint.</p></td>
+</tr>
+<tr class="row-even"><td><p>wc_bytes</p></td>
+<td><p>The number of bytes over and above
+wc_mbytes written to this log since the
+last checkpoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p>wcount</p></td>
+<td><p>The number of times the log has been
+written to disk.</p></td>
+</tr>
+<tr class="row-even"><td><p>wcount_fill</p></td>
+<td><p>The number of times the log has been
+written to disk because the in-memory log
+record cache filled up.</p></td>
+</tr>
+<tr class="row-odd"><td><p>rcount</p></td>
+<td><p>The number of times the log has been read
+from disk.</p></td>
+</tr>
+<tr class="row-even"><td><p>scount</p></td>
+<td><p>The number of times the log has been
+flushed to disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cur_file</p></td>
+<td><p>The current log file number.</p></td>
+</tr>
+<tr class="row-even"><td><p>cur_offset</p></td>
+<td><p>The byte offset in the current log file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>disk_file</p></td>
+<td><p>The log file number of the last record
+known to be on disk.</p></td>
+</tr>
+<tr class="row-even"><td><p>disk_offset</p></td>
+<td><p>The byte offset of the last record known to
+be on disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxcommitperflush</p></td>
+<td><p>The maximum number of commits contained in
+a single log flush.</p></td>
+</tr>
+<tr class="row-even"><td><p>mincommitperflush</p></td>
+<td><p>The minimum number of commits contained in
+a single log flush that contained a commit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>regsize</p></td>
+<td><p>The size of the log region, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p>region_wait</p></td>
+<td><p>The number of times that a thread of
+control was forced to wait before obtaining
+the log region mutex.</p></td>
+</tr>
+<tr class="row-odd"><td><p>region_nowait</p></td>
+<td><p>The number of times that a thread of
+control was able to obtain the log region
+mutex without waiting.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="log_stat_print">
+<span class="sig-name descname"><span class="pre">log_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#log_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the logging subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/logstat_print.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="txn_recover">
+<span class="sig-name descname"><span class="pre">txn_recover</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#txn_recover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tuples (GID, TXN) of transactions prepared but
+still unresolved. This is used while doing environment recovery in an
+application using distributed transactions.</p>
+<p>This method must be called only from a single thread at a time. It
+should be called after DBEnv recovery.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnrecover.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_verbose">
+<span class="sig-name descname"><span class="pre">set_verbose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onoff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns specific additional informational and debugging messages in the
+Berkeley DB message output on and off. To see the additional
+messages, verbose messages must also be configured for the
+application.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envset_verbose.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_verbose">
+<span class="sig-name descname"><span class="pre">get_verbose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the specified <em>which</em> parameter is currently set or
+not.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envget_verbose.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_event_notify">
+<span class="sig-name descname"><span class="pre">set_event_notify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eventFunc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_event_notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures a callback function which is called to notify the process
+of specific Berkeley DB events.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envevent_notify.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_stat">
+<span class="sig-name descname"><span class="pre">mutex_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mutex_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of mutex subsystem statistics with the following
+keys:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>mutex_align</p></td>
+<td><p>The mutex alignment, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p>mutex_tas_spins</p></td>
+<td><p>The number of times test-and-set mutexes
+will spin without blocking.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mutex_cnt</p></td>
+<td><p>The total number of mutexes configured.</p></td>
+</tr>
+<tr class="row-even"><td><p>mutex_free</p></td>
+<td><p>The number of mutexes currently available.</p></td>
+</tr>
+<tr class="row-odd"><td><p>mutex_inuse</p></td>
+<td><p>The number of mutexes currently in use.</p></td>
+</tr>
+<tr class="row-even"><td><p>mutex_inuse_max</p></td>
+<td><p>The maximum number of mutexes ever in use.</p></td>
+</tr>
+<tr class="row-odd"><td><p>regsize</p></td>
+<td><p>The size of the mutex region, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p>region_wait</p></td>
+<td><p>The number of times that a thread of
+control was forced to wait before
+obtaining the mutex region mutex.</p></td>
+</tr>
+<tr class="row-odd"><td><p>region_nowait</p></td>
+<td><p>The number of times that a thread of
+control was able to obtain the mutex
+region mutex without waiting.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_stat_print">
+<span class="sig-name descname"><span class="pre">mutex_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mutex_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the mutex subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexstat_print.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_set_max">
+<span class="sig-name descname"><span class="pre">mutex_set_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mutex_set_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the total number of mutexes to allocate.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexset_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_get_max">
+<span class="sig-name descname"><span class="pre">mutex_get_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mutex_get_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total number of mutexes allocated.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexget_max.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_set_increment">
+<span class="sig-name descname"><span class="pre">mutex_set_increment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mutex_set_increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the number of additional mutexes to allocate.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexset_increment.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_get_increment">
+<span class="sig-name descname"><span class="pre">mutex_get_increment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mutex_get_increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of additional mutexes to allocate.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexget_increment.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_set_align">
+<span class="sig-name descname"><span class="pre">mutex_set_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">align</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mutex_set_align" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mutex alignment, in bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexset_align.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_get_align">
+<span class="sig-name descname"><span class="pre">mutex_get_align</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mutex_get_align" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mutex alignment, in bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexget_align.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_set_tas_spins">
+<span class="sig-name descname"><span class="pre">mutex_set_tas_spins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tas_spins</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mutex_set_tas_spins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify that test-and-set mutexes should spin tas_spins times without
+blocking. Check the default values in the Oracle webpage.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexset_tas_spins.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mutex_get_tas_spins">
+<span class="sig-name descname"><span class="pre">mutex_get_tas_spins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mutex_get_tas_spins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the test-and-set spin count.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/mutexget_tas_spins.html">More info…</a></p>
+</dd></dl>
+
+</section>
+<section id="dbenv-replication-manager-methods">
+<h2>DBEnv Replication Manager Methods<a class="headerlink" href="#dbenv-replication-manager-methods" title="Permalink to this headline">¶</a></h2>
+<p>This module automates many of the tasks needed to provide replication
+abilities in a Berkeley DB system. The module is fairly limited, but
+enough in many cases. Users more demanding must use the <strong>full</strong> Base
+Replication API.</p>
+<p>This module requires pthread support (in Unix), so you must compile
+Berkeley DB with it if you want to be able to use the Replication
+Manager.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_start">
+<span class="sig-name descname"><span class="pre">repmgr_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nthreads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the replication manager.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgrstart.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_site">
+<span class="sig-name descname"><span class="pre">repmgr_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a DB_SITE handle that defines a site’s host/port network
+address. You use the DB_SITE handle to configure and manage
+replication sites.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgr_site.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_site_by_eid">
+<span class="sig-name descname"><span class="pre">repmgr_site_by_eid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_site_by_eid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a DB_SITE handle based on the site’s Environment ID value.
+You use the DB_SITE handle to configure and manage replication sites.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgr_site_by_eid.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_set_ack_policy">
+<span class="sig-name descname"><span class="pre">repmgr_set_ack_policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ack_policy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_set_ack_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies how master and client sites will handle acknowledgment of
+replication messages which are necessary for “permanent” records.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgrset_ack_policy.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_get_ack_policy">
+<span class="sig-name descname"><span class="pre">repmgr_get_ack_policy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_get_ack_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the replication manager’s client acknowledgment policy.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgrget_ack_policy.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_site_list">
+<span class="sig-name descname"><span class="pre">repmgr_site_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_site_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with the status of the sites currently known by
+the replication manager.</p>
+<p>The keys are the Environment ID assigned by the replication manager.
+This is the same value that is passed to the application’s event
+notification function for the DB_EVENT_REP_NEWMASTER event.</p>
+<p>The values are tuples containing the hostname, the TCP/IP port number
+and the link status.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgrsite_list.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_stat">
+<span class="sig-name descname"><span class="pre">repmgr_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with the replication manager statistics. Keys
+are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>perm_failed</p></td>
+<td><p>The number of times a message critical for
+maintaining database integrity (for example, a
+transaction commit), originating at this site,
+did not receive sufficient acknowledgement from
+clients, according to the configured
+acknowledgement policy and acknowledgement
+timeout.</p></td>
+</tr>
+<tr class="row-even"><td><p>msgs_queued</p></td>
+<td><p>The number of outgoing messages which could not
+be transmitted immediately, due to a full
+network buffer, and had to be queued for later
+delivery.</p></td>
+</tr>
+<tr class="row-odd"><td><p>msgs_dropped</p></td>
+<td><p>The number of outgoing messages that were
+completely dropped, because the outgoing
+message queue was full. (Berkeley DB
+replication is tolerant of dropped messages,
+and will automatically request retransmission
+of any missing messages as needed.)</p></td>
+</tr>
+<tr class="row-even"><td><p>connection_drop</p></td>
+<td><p>The number of times an existing TCP/IP
+connection failed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>connect_fail</p></td>
+<td><p>The number of times an attempt to open a new
+TCP/IP connection failed.</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgrstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="repmgr_stat_print">
+<span class="sig-name descname"><span class="pre">repmgr_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repmgr_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the replication manager statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgrstat_print.html">More info…</a></p>
+</dd></dl>
+
+</section>
+<section id="dbenv-replication-methods">
+<h2>DBEnv Replication Methods<a class="headerlink" href="#dbenv-replication-methods" title="Permalink to this headline">¶</a></h2>
+<p>This section provides the raw methods for replication. If possible,
+it is recommended to use the Replication Manager.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_elect">
+<span class="sig-name descname"><span class="pre">rep_elect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsites</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nvotes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_elect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds an election for the master of a replication group.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repelect.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_transport">
+<span class="sig-name descname"><span class="pre">rep_set_transport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transportFunc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_transport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the communication infrastructure for a database
+environment participating in a replicated application.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/reptransport.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_process_messsage">
+<span class="sig-name descname"><span class="pre">rep_process_messsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_process_messsage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes an incoming replication message sent by a member of the
+replication group to the local database environment.</p>
+<p>Returns a two element tuple.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmessage.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_start">
+<span class="sig-name descname"><span class="pre">rep_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures the database environment as a client or master in a group
+of replicated database environments.</p>
+<p>The DB_ENV-&gt;rep_start method is not called by most replication
+applications. It should only be called by applications implementing
+their own network transport layer, explicitly holding replication
+group elections and handling replication messages outside of the
+replication manager framework.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repstart.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_sync">
+<span class="sig-name descname"><span class="pre">rep_sync</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rep_sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forces master synchronization to begin for this client. This method
+is the other half of setting the DB_REP_CONF_DELAYCLIENT flag via the
+DB_ENV-&gt;rep_set_config method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repsync.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_config">
+<span class="sig-name descname"><span class="pre">rep_set_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onoff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures the Berkeley DB replication subsystem.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repconfig.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_config">
+<span class="sig-name descname"><span class="pre">rep_get_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the specified which parameter is currently set or
+not.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_config.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_limit">
+<span class="sig-name descname"><span class="pre">rep_set_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a byte-count limit on the amount of data that will be
+transmitted from a site in response to a single message processed by
+the DB_ENV-&gt;rep_process_message method. The limit is not a hard
+limit, and the record that exceeds the limit is the last record to be
+sent.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repset_limit.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_limit">
+<span class="sig-name descname"><span class="pre">rep_get_limit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a byte-count limit on the amount of data that will be
+transmitted from a site in response to a single message processed by
+the DB_ENV-&gt;rep_process_message method. The limit is not a hard
+limit, and the record that exceeds the limit is the last record to be
+sent.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_limit.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_request">
+<span class="sig-name descname"><span class="pre">rep_set_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a threshold for the minimum and maximum time that a client
+waits before requesting retransmission of a missing message.
+Specifically, if the client detects a gap in the sequence of incoming
+log records or database pages, Berkeley DB will wait for at least min
+microseconds before requesting retransmission of the missing record.
+Berkeley DB will double that amount before requesting the same
+missing record again, and so on, up to a maximum threshold of max
+microseconds.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repset_request.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_request">
+<span class="sig-name descname"><span class="pre">rep_get_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the minimum and maximum number of microseconds a
+client waits before requesting retransmission.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_request.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_nsites">
+<span class="sig-name descname"><span class="pre">rep_set_nsites</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsites</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_nsites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the total number of sites in a replication group.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repnsites.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_nsites">
+<span class="sig-name descname"><span class="pre">rep_get_nsites</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_nsites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total number of sites in the replication group.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_nsites.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_priority">
+<span class="sig-name descname"><span class="pre">rep_set_priority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">priority</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the database environment’s priority in replication group
+elections. The priority must be a positive integer, or 0 if this
+environment cannot be a replication group master.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/reppriority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_priority">
+<span class="sig-name descname"><span class="pre">rep_get_priority</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the database environment priority.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_priority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_timeout">
+<span class="sig-name descname"><span class="pre">rep_set_timeout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies a variety of replication timeout values.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repset_timeout.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_timeout">
+<span class="sig-name descname"><span class="pre">rep_get_timeout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the timeout value for the specified <em>which</em> parameter.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_timeout.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_set_clockskew">
+<span class="sig-name descname"><span class="pre">rep_set_clockskew</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slow</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_set_clockskew" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the clock skew ratio among replication group members based on
+the fastest and slowest measurements among the group for use with
+master leases.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repclockskew.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_get_clockskew">
+<span class="sig-name descname"><span class="pre">rep_get_clockskew</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rep_get_clockskew" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the current clock skew values.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repget_clockskew.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_stat">
+<span class="sig-name descname"><span class="pre">rep_stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with the replication subsystem statistics. Keys
+are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>st_bulk_fills</p></td>
+<td><p>The number of times the bulk buffer filled
+up, forcing the buffer content to be sent.</p></td>
+</tr>
+<tr class="row-even"><td><p>bulk_overflows</p></td>
+<td><p>The number of times a record was bigger
+than the entire bulk buffer, and therefore
+had to be sent as a singleton.</p></td>
+</tr>
+<tr class="row-odd"><td><p>bulk_records</p></td>
+<td><p>The number of records added to a bulk
+buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p>bulk_transfers</p></td>
+<td><p>The number of bulk buffers transferred (via
+a call to the application’s send function).</p></td>
+</tr>
+<tr class="row-odd"><td><p>client_rerequests</p></td>
+<td><p>The number of times this client site
+received a “re-request” message, indicating
+that a request it previously sent to
+another client could not be serviced by
+that client. (Compare to client_svc_miss.)</p></td>
+</tr>
+<tr class="row-even"><td><p>client_svc_miss</p></td>
+<td><p>The number of “request” type messages
+received by this client that could not be
+processed, forcing the originating
+requester to try sending the request to the
+master (or another client).</p></td>
+</tr>
+<tr class="row-odd"><td><p>client_svc_req</p></td>
+<td><p>The number of “request” type messages
+received by this client. (“Request”
+messages are usually sent from a client to
+the master, but a message marked with the
+DB_REP_ANYWHERE flag in the invocation of
+the application’s send function may be sent
+to another client instead.)</p></td>
+</tr>
+<tr class="row-even"><td><p>dupmasters</p></td>
+<td><p>The number of duplicate master conditions
+originally detected at this site.</p></td>
+</tr>
+<tr class="row-odd"><td><p>egen</p></td>
+<td><p>The current election generation number.</p></td>
+</tr>
+<tr class="row-even"><td><p>election_cur_winner</p></td>
+<td><p>The election winner.</p></td>
+</tr>
+<tr class="row-odd"><td><p>election_gen</p></td>
+<td><p>The election generation number.</p></td>
+</tr>
+<tr class="row-even"><td><p>election_lsn</p></td>
+<td><p>The maximum LSN of election winner.</p></td>
+</tr>
+<tr class="row-odd"><td><p>election_nsites</p></td>
+<td><p>The number sites responding to this site
+during the last election.</p></td>
+</tr>
+<tr class="row-even"><td><p>election_nvotes</p></td>
+<td><p>The number of votes required in the last
+election.</p></td>
+</tr>
+<tr class="row-odd"><td><p>election_priority</p></td>
+<td><p>The election priority.</p></td>
+</tr>
+<tr class="row-even"><td><p>election_sec</p></td>
+<td><p>The number of seconds the last election
+took (the total election time is
+election_sec plus election_usec).</p></td>
+</tr>
+<tr class="row-odd"><td><p>election_status</p></td>
+<td><p>The current election phase (0 if no
+election is in progress).</p></td>
+</tr>
+<tr class="row-even"><td><p>election_tiebreaker</p></td>
+<td><p>The election tiebreaker value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>election_usec</p></td>
+<td><p>The number of microseconds the last
+election took (the total election time is
+election_sec plus election_usec).</p></td>
+</tr>
+<tr class="row-even"><td><p>election_votes</p></td>
+<td><p>The number of votes received in the last
+election.</p></td>
+</tr>
+<tr class="row-odd"><td><p>elections</p></td>
+<td><p>The number of elections held.</p></td>
+</tr>
+<tr class="row-even"><td><p>elections_won</p></td>
+<td><p>The number of elections won.</p></td>
+</tr>
+<tr class="row-odd"><td><p>env_id</p></td>
+<td><p>The current environment ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>env_priority</p></td>
+<td><p>The current environment priority.</p></td>
+</tr>
+<tr class="row-odd"><td><p>gen</p></td>
+<td><p>The current generation number.</p></td>
+</tr>
+<tr class="row-even"><td><p>log_duplicated</p></td>
+<td><p>The number of duplicate log records
+received.</p></td>
+</tr>
+<tr class="row-odd"><td><p>log_queued</p></td>
+<td><p>The number of log records currently queued.</p></td>
+</tr>
+<tr class="row-even"><td><p>log_queued_max</p></td>
+<td><p>The maximum number of log records ever
+queued at once.</p></td>
+</tr>
+<tr class="row-odd"><td><p>log_queued_total</p></td>
+<td><p>The total number of log records queued.</p></td>
+</tr>
+<tr class="row-even"><td><p>log_records</p></td>
+<td><p>The number of log records received and
+appended to the log.</p></td>
+</tr>
+<tr class="row-odd"><td><p>log_requested</p></td>
+<td><p>The number of times log records were missed
+and requested.</p></td>
+</tr>
+<tr class="row-even"><td><p>master</p></td>
+<td><p>The current master environment ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>master_changes</p></td>
+<td><p>The number of times the master has changed.</p></td>
+</tr>
+<tr class="row-even"><td><p>max_lease_sec</p></td>
+<td><p>The number of seconds of the longest lease
+(the total lease time is max_lease_sec plus
+max_lease_usec).</p></td>
+</tr>
+<tr class="row-odd"><td><p>max_lease_usec</p></td>
+<td><p>The number of microseconds of the longest
+lease (the total lease time is
+max_lease_sec plus max_lease_usec).</p></td>
+</tr>
+<tr class="row-even"><td><p>max_perm_lsn</p></td>
+<td><p>The LSN of the maximum permanent log
+record, or 0 if there are no permanent log
+records.</p></td>
+</tr>
+<tr class="row-odd"><td><p>msgs_badgen</p></td>
+<td><p>The number of messages received with a bad
+generation number.</p></td>
+</tr>
+<tr class="row-even"><td><p>msgs_processed</p></td>
+<td><p>The number of messages received and
+processed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>msgs_recover</p></td>
+<td><p>The number of messages ignored due to
+pending recovery.</p></td>
+</tr>
+<tr class="row-even"><td><p>msgs_send_failures</p></td>
+<td><p>The number of failed message sends.</p></td>
+</tr>
+<tr class="row-odd"><td><p>msgs_sent</p></td>
+<td><p>The number of messages sent.</p></td>
+</tr>
+<tr class="row-even"><td><p>newsites</p></td>
+<td><p>The number of new site messages received.</p></td>
+</tr>
+<tr class="row-odd"><td><p>next_lsn</p></td>
+<td><p>In replication environments configured as
+masters, the next LSN expected. In
+replication environments configured as
+clients, the next LSN to be used.</p></td>
+</tr>
+<tr class="row-even"><td><p>next_pg</p></td>
+<td><p>The next page number we expect to receive.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nsites</p></td>
+<td><p>The number of sites used in the last
+election.</p></td>
+</tr>
+<tr class="row-even"><td><p>nthrottles</p></td>
+<td><p>Transmission limited. This indicates the
+number of times that data transmission was
+stopped to limit the amount of data sent in
+response to a single call to
+DB_ENV-&gt;rep_process_message.</p></td>
+</tr>
+<tr class="row-odd"><td><p>outdated</p></td>
+<td><p>The number of outdated conditions detected.</p></td>
+</tr>
+<tr class="row-even"><td><p>pg_duplicated</p></td>
+<td><p>The number of duplicate pages received.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pg_records</p></td>
+<td><p>The number of pages received and stored.</p></td>
+</tr>
+<tr class="row-even"><td><p>pg_requested</p></td>
+<td><p>The number of pages missed and requested
+from the master.</p></td>
+</tr>
+<tr class="row-odd"><td><p>startsync_delayed</p></td>
+<td><p>The number of times the client had to delay
+the start of a cache flush operation
+(initiated by the master for an impending
+checkpoint) because it was missing some
+previous log record(s).</p></td>
+</tr>
+<tr class="row-even"><td><p>startup_complete</p></td>
+<td><p>The client site has completed its startup
+procedures and is now handling live records
+from the master.</p></td>
+</tr>
+<tr class="row-odd"><td><p>status</p></td>
+<td><dl class="simple">
+<dt>The current replication mode. Set to</dt><dd><p>DB_REP_MASTER if the environment is a
+replication master, DB_REP_CLIENT if the
+environment is a replication client, or 0
+if replication is not configured.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p>txns_applied</p></td>
+<td><p>The number of transactions applied.</p></td>
+</tr>
+<tr class="row-odd"><td><p>waiting_lsn</p></td>
+<td><p>The LSN of the first log record we have
+after missing log records being waited for,
+or 0 if no log records are currently
+missing.</p></td>
+</tr>
+<tr class="row-even"><td><p>waiting_pg</p></td>
+<td><p>The page number of the first page we have
+after missing pages being waited for, or 0
+if no pages are currently missing.</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rep_stat_print">
+<span class="sig-name descname"><span class="pre">rep_stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rep_stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the replication subsystem statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repstat_print.html">More info…</a></p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DBEnv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dbenv-attributes">DBEnv Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dbenv-methods">DBEnv Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dbenv-replication-manager-methods">DBEnv Replication Manager Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dbenv-replication-methods">DBEnv Replication Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="introduction.html" title="previous chapter">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+      <li>Next: <a href="db.html" title="next chapter">DB</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

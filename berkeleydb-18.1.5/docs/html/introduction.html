@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DBEnv" href="dbenv.html" />
+    <link rel="prev" title="Python Bindings for Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1" href="index.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="oracle-berkeley-db-4-8-5-3-6-2-and-18-1-python-extension-package">
+<h1>Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package<a class="headerlink" href="#oracle-berkeley-db-4-8-5-3-6-2-and-18-1-python-extension-package" title="Permalink to this headline">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This is a simple bit of documentation for the berkeleydb.db Python extension
+module which wraps the Oracle Berkeley DB C library. The extension
+module is located in a Python package along with a few pure python
+modules.</p>
+<p>It is expected that this module will be used in the following general
+ways by different programmers in different situations. The goals of
+this module are to allow all of these methods without making things too
+complex for the simple cases, and without leaving out funtionality
+needed by the complex cases.</p>
+<ol class="arabic simple">
+<li><p><strong>Backwards compatibility:</strong> It is desirable for this package to be a
+near drop-in replacement for the berkeleydb module shipped with Python
+which is designed to wrap either DB 1.85, or the 1.85 compatibility
+interface. This means that there will need to be equivalent object
+creation functions available, (btopen(), hashopen(), and rnopen())
+and the objects returned will need to have the same or at least
+similar methods available, (specifically, first(), last(), next(),
+and prev() will need to be available without the user needing to
+explicitly use a cursor.)  All of these have been implemented in
+Python code in the berkeleydb.__init__.py module.</p></li>
+<li><p><strong>Simple persistent dictionary:</strong> One small step beyond the above.
+The programmer may be aware of and use the new DB object type
+directly, but only needs it from a single process and thread. The
+programmer should not have to be bothered with using a DBEnv, and the
+DB object should behave as much like a dictionary as possible.</p></li>
+<li><p><strong>Concurrent access dictionaries:</strong> This refers to the ability to
+simultaneously have one writer and multiple readers of a DB (either
+in multiple threads or processes) and is implemented simply by
+creating a DBEnv with certain flags. No extra work is required to
+allow this access mode in berkeleydb.</p></li>
+<li><p><strong>Advanced transactional data store:</strong> This mode of use is where the
+full capabilities of the Oracle Berkeley DB library are called into action.
+The programmer will probably not use the dictionary access methods as
+much as the regular methods of the DB object, so he can pass
+transaction objects to the methods. Again, most of this advanced
+functionality is activated simply by opening a DBEnv with the proper
+flags, and also by using transactions and being aware of and reacting
+to deadlock exceptions, etc.</p></li>
+</ol>
+</section>
+<section id="types-provided">
+<h2>Types Provided<a class="headerlink" href="#types-provided" title="Permalink to this headline">¶</a></h2>
+<p>The berkeleydb.db extension module provides the following object types:</p>
+<ul class="simple">
+<li><p><strong>DB:</strong> The basic database object, capable of Hash, BTree, Recno,
+Queue and Heap access methods.</p></li>
+<li><p><strong>DBEnv:</strong> Provides a Database Environment for more advanced database
+use. Apps using transactions, logging, concurrent access, etc. will
+need to have an environment object.</p></li>
+<li><p><strong>DBCursor:</strong> A pointer-like object used to traverse a database.</p></li>
+<li><p><strong>DBTxn:</strong> A database transaction. Allows for multi-file commit, abort
+and checkpoint of database modifications.</p></li>
+<li><p><strong>DBLock:</strong> An opaque handle for a lock. See DBEnv.lock_get() and
+DBEnv.lock_put(). Locks are not necessarily associated with anything
+in the database, but can be used for any syncronization task across
+all threads and processes that have the DBEnv open.</p></li>
+<li><p><strong>DBSequence:</strong> Sequences provide an arbitrary number of persistent
+objects that return an increasing or decreasing sequence of integers.
+Opening a sequence handle associates it with a record in a database.</p></li>
+<li><p><strong>DBSite:</strong> Site object for Replication Manager.</p></li>
+</ul>
+</section>
+<section id="top-level-functions">
+<h2>Top level functions<a class="headerlink" href="#top-level-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with major, minor and patch level.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envversion.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="full_version">
+<span class="sig-name descname"><span class="pre">full_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#full_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the full version string, family, release,
+major, minor and patch level.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/envfullversion.html">More info…</a></p>
+</dd></dl>
+
+</section>
+<section id="exceptions-provided">
+<h2>Exceptions Provided<a class="headerlink" href="#exceptions-provided" title="Permalink to this headline">¶</a></h2>
+<p>The Oracle Berkeley DB C API uses function return codes to signal various
+errors. The berkeleydb.db module checks for these error codes and turns them
+into Python exceptions, allowing you to use familiar try:… except:…
+constructs and not have to bother with checking every method’s return
+value.</p>
+<p>Each of the error codes is turned into an exception specific to that
+error code, as outlined in the table below. If you are using the C API
+documentation then it is very easy to map the error return codes
+specified there to the name of the Python exception that will be raised.
+Simply refer to the table below.</p>
+<p>Each exception derives from the DBError exception class so if you just
+want to catch generic errors you can use DBError to do it. Since
+DBNotFoundError is raised when a given key is not found in the database,
+DBNotFoundError also derives from the standard KeyError exception to
+help make a DB look and act like a dictionary. We do the same trick with
+DBKeyEmptyError.</p>
+<p>When any of these exceptions is raised, the associated value is a tuple
+containing an integer representing the error code and a string for the
+error message itself.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>DBError</strong></p></td>
+<td><p>Base class, all others derive from this</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBCursorClosedError</strong></p></td>
+<td><p>When trying to use a closed cursor</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBForeignConflictError</strong></p></td>
+<td><p>DB_FOREIGN_CONFLICT</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBKeyEmptyError</strong></p></td>
+<td><p>DB_KEYEMPTY (also derives from KeyError)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBKeyExistError</strong></p></td>
+<td><p>DB_KEYEXIST</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBLockDeadlockError</strong></p></td>
+<td><p>DB_LOCK_DEADLOCK</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBLockNotGrantedError</strong></p></td>
+<td><p>DB_LOCK_NOTGRANTED</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBNotFoundError</strong></p></td>
+<td><p>DB_NOTFOUND (also derives from KeyError)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBOldVersionError</strong></p></td>
+<td><p>DB_OLD_VERSION</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBPageNotFoundError</strong></p></td>
+<td><p>DB_PAGE_NOTFOUND</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBRepHandleDeadError</strong></p></td>
+<td><p>DB_REP_HANDLE_DEAD</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBRepLeaseExpiredError</strong></p></td>
+<td><p>DB_REP_LEASE_EXPIRED</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBRepLockoutError</strong></p></td>
+<td><p>DB_REP_LOCKOUT</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBRepUnavailError</strong></p></td>
+<td><p>DB_REP_UNAVAIL</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBRunRecoveryError</strong></p></td>
+<td><p>DB_RUNRECOVERY</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBSecondaryBadError</strong></p></td>
+<td><p>DB_SECONDARY_BAD</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBVerifyBadError</strong></p></td>
+<td><p>DB_VERIFY_BAD</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBNoServerError</strong></p></td>
+<td><p>DB_NOSERVER</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBNoServerHomeError</strong></p></td>
+<td><p>DB_NOSERVER_HOME</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBNoServerIDError</strong></p></td>
+<td><p>DB_NOSERVER_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBInvalidArgError</strong></p></td>
+<td><p>EINVAL</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBAccessError</strong></p></td>
+<td><p>EACCES</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBNoSpaceError</strong></p></td>
+<td><p>ENOSPC</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBNoMemoryError</strong></p></td>
+<td><p>DB_BUFFER_SMALL</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBAgainError</strong></p></td>
+<td><p>EAGAIN</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBBusyError</strong></p></td>
+<td><p>EBUSY</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBFileExistsError</strong></p></td>
+<td><p>EEXIST</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DBNoSuchFileError</strong></p></td>
+<td><p>ENOENT</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DBPermissionsError</strong></p></td>
+<td><p>EPERM</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="other-package-modules">
+<h2>Other Package Modules<a class="headerlink" href="#other-package-modules" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>dbshelve.py:</strong> This is an implementation of the standard Python
+shelve concept for storing objects that uses berkeleydb specifically, and
+also exposes some of the more advanced methods and capabilities of the
+underlying DB.</p></li>
+<li><p><strong>dbtables.py:</strong> This is a module by Gregory Smith that implements a
+simplistic table structure on top of a DB.</p></li>
+<li><p><strong>dbutils.py:</strong> A catch-all for python code that is generally useful
+when working with DB’s</p></li>
+<li><p><strong>dbobj.py:</strong> Contains subclassable versions of DB and DBEnv.</p></li>
+<li><p><strong>dbrecio.py:</strong> Contains the DBRecIO class that can be used to do
+partial reads and writes from a DB record using a file-like interface.
+Contributed by Itamar Shtull-Trauring.</p></li>
+</ul>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>A full unit test suite is being developed to exercise the various object
+types, their methods and the various usage modes described in the
+introduction. <a class="reference external" href="http://pyunit.sourceforge.net/">PyUnit</a> is used and
+the tests are structured such that they can be run unattended and
+automated. There are currently 482 test cases!  (March 2010)</p>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<p>See the C language API <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/index.html">online documentation</a>
+on Oracle’s website for more details of the
+functionality of each of these methods. The names of all the Python
+methods should be the same or similar to the names in the C API.</p>
+<p>Oracle Berkeley DB is very powerful and versatile, but it is complex to
+use correctly. <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/toc.htm">Oracle documentation</a> is very
+complete. Please, review it.</p>
+<p><strong>NOTE:</strong> All the methods shown below having more than one keyword
+argument are actually implemented using keyword argument parsing, so you
+can use keywords to provide optional parameters as desired. Those that
+have only a single optional argument are implemented without keyword
+parsing to help keep the implementation simple. If this is too confusing
+let me know and I’ll think about using keywords for everything.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#types-provided">Types Provided</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#top-level-functions">Top level functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions-provided">Exceptions Provided</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-package-modules">Other Package Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Python Bindings for Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1</a></li>
+      <li>Next: <a href="dbenv.html" title="next chapter">DBEnv</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

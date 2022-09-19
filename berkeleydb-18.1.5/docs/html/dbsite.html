@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DBSite &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="History" href="history.html" />
+    <link rel="prev" title="DBSequence" href="dbsequence.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dbsite">
+<h1>DBSite<a class="headerlink" href="#dbsite" title="Permalink to this headline">¶</a></h1>
+<p>Read <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/programmer_reference/group_membership.html">Oracle documentation</a>
+for better understanding.</p>
+<p>You use the DB_SITE handle to configure and manage replication sites.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/repmgr_site.html">More info…</a></p>
+<section id="dbsite-methods">
+<h2>DBSite Methods<a class="headerlink" href="#dbsite-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close a DBSite handle.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsite_close.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_address">
+<span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a replication site’s network address. That is, this method
+returns a tuple with the site’s hostname and port.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsite_get_address.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the specified which parameter is currently set.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsite_get_config.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_eid">
+<span class="sig-name descname"><span class="pre">get_eid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_eid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a replication site’s Environment ID (EID).
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsite_get_eid.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the site from the replication group. If called at the master
+site, repmgr updates the membership database directly. If called from
+a client, this method causes a request to be sent to the master to
+perform the operation. The method then awaits confirmation.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsite_remove.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_config">
+<span class="sig-name descname"><span class="pre">set_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures a replication site.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsite_set_config.html">More info…</a></p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DBSite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dbsite-methods">DBSite Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="dbsequence.html" title="previous chapter">DBSequence</a></li>
+      <li>Next: <a href="history.html" title="next chapter">History</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

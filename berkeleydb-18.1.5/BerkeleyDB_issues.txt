@@ -1,0 +1,35 @@
+Reported
+--------
+
+- 20201211: In "docs/api_reference/C/envset_backup_callbacks.html", "open_func"
+  gets a pointer to pointer. It is suppose to use it to store the handle for
+  the other callbacks, but it is not explained in the documentation. In fact,
+  the lifecycle of "handle" is not explained at all.
+
+- 20201211: In "docs/api_reference/C/envset_backup_callbacks.html" the
+  callbacks are declared as returning "int", but in the documentation nothing
+  is said about what should be returned in the callbacks.
+
+- 20201211: In "docs/api_reference/C/envget_backup_callbacks.html" it is said:
+  "write_func: The close_func parameter is the function used to write data
+  during a backup.". It should be "write_func", not "close_func".
+
+- 20201211: In "docs/api_reference/C/envget_backup_config.html" and
+  "docs/api_reference/C/envset_backup_config.html" there is no indication that
+  those functions returns an "int".
+
+- 20201211: In "db.h", "version()" is inside "DB_LOGC PUBLIC HANDLE LIST", but
+  it is not documented anywhere.
+
+- 20201210: In
+  https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_lk_exclusive.html
+  is said: "nowait_onoff: If set to 0, this method will block until it can
+  obtain the exclusive lock on the database.". But "this method"
+  (set_lk_exclusive) doesn't block, the method that would block is "db->open()".
+
+- 20201206: Oracle Berkeley DB "heap" access method misscounts records in
+  "db.stat()". Details at
+  https://community.oracle.com/tech/developers/discussion/4478383/oracle-berkeley-db-heap-access-method-misscounts-records-in-db-stat/p1?new=1
+
+Solved
+------

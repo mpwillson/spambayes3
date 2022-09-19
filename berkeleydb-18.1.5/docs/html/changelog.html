@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Changelog &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog of legacy “bsddb3” project" href="changelog-bsddb3.html" />
+    <link rel="prev" title="History" href="history.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<section id="id1">
+<h2>18.1.5 - 2022-01-21:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> Drop support for Python 3.6.</p>
+<p>This breaking change should usually require a major and/or minor
+number update. Since <code class="docutils literal notranslate"><span class="pre">berkeleydb</span></code> traditional numbering is
+related to the higher Oracle Berkeley DB supported, I would
+usually wait until Oracle releases a new version to upgrade my
+own version and deprecate old Python support at the same time.
+Given that Oracle has not released a new Oracle Berkeley DB in
+almost four years, I must break this practice for now.</p>
+<p>I am sorry if this update breaks your Python 3.6 environment.
+In that case, please pin your <code class="docutils literal notranslate"><span class="pre">berkeleydb</span></code> installation to
+version 18.1.4, the last Python 3.6 compatible release.</p>
+<p>Send me constructive feedback if appropiate.</p>
+</li>
+<li><p>Python 3.10 support.</p></li>
+<li><p>Testsuite works now in Python 3.11.0a4.</p></li>
+<li><p>Python 3.11 added to the full test matrix.</p></li>
+<li><p>Python 3.11 deprecates the ancient but undocumented method
+<code class="docutils literal notranslate"><span class="pre">unittest.makeSuite()</span></code> and it will be deleted in Python
+3.13. We migrate the tests to
+<code class="docutils literal notranslate"><span class="pre">unittest.TestLoader.loadTestsFromTestCase()</span></code>.</p></li>
+<li><p>Experimental Python 3.11 support. Tested in 3.11.0a4.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id2">
+<h2>18.1.4 - 2021-05-19:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p>If your “pip” is modern enough, “setuptools” is automatically
+added as a built-time dependency.</p>
+<p>If not, you <strong>MUST</strong> install “setuptools” package first.</p>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2>18.1.3 - 2021-05-19:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p>Docs in <a class="reference external" href="https://docs.jcea.es/berkeleydb/">https://docs.jcea.es/berkeleydb/</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">publish</span></code> build and publish the documentation online.</p></li>
+<li><p>Python 3.10 deprecated <code class="docutils literal notranslate"><span class="pre">distutils</span></code>. <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> is now an
+installation dependency.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">dist</span></code> will generate the HTML documentation and will
+include it in the released package. You can unpack the package
+to read the docs.</p></li>
+<li><p>Do not install tests anymore when doing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>,
+although the tests are included in the package. You can unpack
+the package to study the tests, maybe in order to learn about
+how to use advanced Oracle Berkeley DB features.</p>
+<p>This change had an unexpected ripple effect in all code. Hopefully for the
+better.</p>
+</li>
+<li><p>Python 3.10 couldn’t find build directory.</p></li>
+<li><p>Python 3.10.0a2 test suite compatibility.</p></li>
+<li><p>Python 3.10 added to the full test matrix.</p></li>
+<li><p>After Python 3.7, threads are always available. Take them for granted,
+even in Python 3.6.</p></li>
+<li><p>In the same direction, now some libraries are always available: pathlib,
+warnings, queue, gc.</p></li>
+<li><p>Support <code class="docutils literal notranslate"><span class="pre">DB.get_lk_exclusive()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">DB.set_lk_exclusive()</span></code> if you are linking against Oracle
+Berkeley DB 5.3 or newer.</p></li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> The record number in the tuple
+returned by <code class="docutils literal notranslate"><span class="pre">DB.consume()</span></code> is now a number instead of a
+binary key.</p></li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> The record number in the tuple
+returned by <code class="docutils literal notranslate"><span class="pre">DB.consume_wait()</span></code> is now a number instead of a
+binary key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.consume()</span></code> and <code class="docutils literal notranslate"><span class="pre">DB.consume_wait()</span></code> now can request
+partial records.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.get()</span></code> and <code class="docutils literal notranslate"><span class="pre">DB.pget()</span></code> could misunderstand flags.</p></li>
+<li><p>If you are using Oracle Berkeley DB 5.3 or newer, you have
+these new flags: <code class="docutils literal notranslate"><span class="pre">DB_BACKUP_CLEAN</span></code>, <code class="docutils literal notranslate"><span class="pre">DB_BACKUP_FILES</span></code>,
+<code class="docutils literal notranslate"><span class="pre">DB_BACKUP_NO_LOGS</span></code>, <code class="docutils literal notranslate"><span class="pre">DB_BACKUP_SINGLE_DIR</span></code> and
+<code class="docutils literal notranslate"><span class="pre">DB_BACKUP_UPDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">DB_BACKUP_WRITE_DIRECT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">DB_BACKUP_READ_COUNT</span></code>, <code class="docutils literal notranslate"><span class="pre">DB_BACKUP_READ_SLEEP</span></code>,
+<code class="docutils literal notranslate"><span class="pre">DB_BACKUP_SIZE</span></code>.</p></li>
+<li><p>If you are using Oracle Berkeley DB 18.1 or newer, you have these new
+flags: <code class="docutils literal notranslate"><span class="pre">DB_BACKUP_DEEP_COPY</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBEnv.backup()</span></code>, <code class="docutils literal notranslate"><span class="pre">DBEnv.dbbackup()</span></code>
+<code class="docutils literal notranslate"><span class="pre">DB.get_backup_config()</span></code> and <code class="docutils literal notranslate"><span class="pre">DB.set_backup_config()</span></code>
+available if you are using Oracle Berkeley DB 5.3 or newer.
+These methods allow you to do hot backups without needing to
+follow a careful procedure, and they can be incremental.</p></li>
+<li><p>Changelog moved to Sphinx documentation.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id4">
+<h2>18.1.2 - 2020-12-07:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Releases 18.1.0 and 18.1.1 were incomplete. Thanks to Mihai.i
+for reporting.</p></li>
+<li><p>Export exception <code class="docutils literal notranslate"><span class="pre">DBMetaChksumFail</span></code> (from error
+<code class="docutils literal notranslate"><span class="pre">DB_META_CHKSUM_FAIL</span></code>) if running Oracle Berkeley DB version
+6.2 or newer.</p></li>
+<li><p>Support Heap access method if you are linking against Oracle Berkeley DB
+5.3 or newer.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.put()</span></code> can add new records or overwrite old ones in
+Heap access method.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.append()</span></code> was extended to support Heap access method.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.cursor()</span></code> was extended to support Heap access method.</p></li>
+<li><p>Implement, test and document <code class="docutils literal notranslate"><span class="pre">DB.get_heapsize()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">DB.set_heapsize()</span></code>, <code class="docutils literal notranslate"><span class="pre">DB.get_heap_regionsize()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">DB.set_heap_regionsize()</span></code>.</p></li>
+<li><p>Export exception <code class="docutils literal notranslate"><span class="pre">DBHeapFull</span></code> (from error
+<code class="docutils literal notranslate"><span class="pre">DB_HEAP_FULL</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.stats()</span></code> provides stats for Heap access method.</p></li>
+</ul>
+</li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> Add <code class="docutils literal notranslate"><span class="pre">dbtype</span></code> member in
+<code class="docutils literal notranslate"><span class="pre">DBObject</span></code> object in the C API. Increase C API version. This
+change has ripple effect in the code.</p></li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> <code class="docutils literal notranslate"><span class="pre">primaryDBType</span></code> member in
+<code class="docutils literal notranslate"><span class="pre">DBObject</span></code> object in the C API is now type <code class="docutils literal notranslate"><span class="pre">DBTYPE</span></code>.
+Increase C API version. This change has ripple effect in the
+code.</p></li>
+<li><p>Now <code class="docutils literal notranslate"><span class="pre">DB.get_type()</span></code> can be called anytime and it doesn’t
+raise an exception if called before the database is open. If
+the database type is not known, <code class="docutils literal notranslate"><span class="pre">DB_UNKNOWN</span></code> is returned.
+This is a deviation from the Oracle Berkeley DB C API.</p></li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> <code class="docutils literal notranslate"><span class="pre">DB.type()</span></code> method is
+dropped. It was never documented. Use <code class="docutils literal notranslate"><span class="pre">DB.get_type()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.stats()</span></code> returns new keys in the dictionary:</p>
+<ul>
+<li><p>Hash, Btree and Recno access methods: Added <code class="docutils literal notranslate"><span class="pre">metaflags</span></code>
+(always) and <code class="docutils literal notranslate"><span class="pre">ext_files</span></code> (if linked against Oracle
+Berkeley DB 6.2 or newer).</p></li>
+<li><p>Queue access method: Added <code class="docutils literal notranslate"><span class="pre">metaflags</span></code> (always).</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id5">
+<h2>18.1.1 - 2020-12-01:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p>If you try to install this library in an unsupported Python
+environment, instruct the user about how to install legacy
+<code class="docutils literal notranslate"><span class="pre">bsddb3</span></code> library.</p></li>
+<li><p>Expose <code class="docutils literal notranslate"><span class="pre">DBSite</span></code> object in the C API. Increase C API version.</p></li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> Ancient release 4.2.8 added
+weakref support to all bsddb.db objects, but from now on this
+feature requires at least Python 3.9 because I have migrated
+from static types to heap types. Let me know if this is a
+problem for you. I could, for example, keep the old types in
+Python &lt; 3.9, if needed.</p>
+<p>Details:</p>
+<p>Py_tp_dictoffset / Py_tp_finalize are unsettable in stable API
+<a class="reference external" href="https://bugs.python.org/issue38140">https://bugs.python.org/issue38140</a></p>
+<p>bpo-38140: Make dict and weakref offsets opaque for C heap types (#16076)
+<a class="reference external" href="https://github.com/python/cpython/commit/3368f3c6ae4140a0883e19350e672fd09c9db616">https://github.com/python/cpython/commit/3368f3c6ae4140a0883e19350e672fd09c9db616</a></p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_iter_mixin</span></code> and <code class="docutils literal notranslate"><span class="pre">_DBWithCursor</span></code> classes have been
+rewritten to avoid the need of getting a weak reference to
+<code class="docutils literal notranslate"><span class="pre">DBCursor</span></code> objects, since now it is problematic if Python &lt;
+3.9.</p></li>
+<li><p>Wai Keen Woon and Nik Adam sent some weeks ago a patch to
+solve a problem with <code class="docutils literal notranslate"><span class="pre">DB.verify()</span></code> always succeeding.
+Refactoring in that area in 18.1.0 made that patch unneeded,
+but I added the test case provided to the test suite.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBEnv.cdsgroup_begin()</span></code> implemented.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBTxn.set_priority()</span></code> and <code class="docutils literal notranslate"><span class="pre">DBTxn.get_priority()</span></code>
+implemented. You need to link this library against Oracle
+Berkeley DB &gt;= 5.3.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBEnv.set_lk_max()</span></code> was deprecated and deleted long time
+ago. Time to delete it from documentation too.</p></li>
+<li><p><strong>WARNING - BREAKING CHANGE:</strong> <code class="docutils literal notranslate"><span class="pre">DB.compact()</span></code> used to return
+a number, but now it returns a dictionary. If you need access
+to the old return value, you can do
+<code class="docutils literal notranslate"><span class="pre">DB.compact()['pages_truncated']</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.compact()</span></code> has been supported <code class="docutils literal notranslate"><span class="pre">txn</span></code> parameter for a
+long time, but it was not documented.</p></li>
+<li><p>The dictionary returned by <code class="docutils literal notranslate"><span class="pre">DB.compact()</span></code> has an <code class="docutils literal notranslate"><span class="pre">end</span></code>
+entry marking the database key/page number where the
+compaction stopped. You could use it to do partial/incremental
+database compaction.</p></li>
+<li><p>Add an optional parameter to <code class="docutils literal notranslate"><span class="pre">DBEnv.log_flush()</span></code>.</p></li>
+<li><p>You can override the directory where the tests are run with TMPDIR
+environment variable. If that environment variable is not
+defined, test will run in <code class="docutils literal notranslate"><span class="pre">/tmp/ram/</span></code> if exists and in
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code> if <code class="docutils literal notranslate"><span class="pre">/tmp/ram/</span></code> doesn’t exists or it is not a
+directory. The idea is that <code class="docutils literal notranslate"><span class="pre">/tmp/ram/</span></code> is a ramdisk and the
+test will run faster.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id6">
+<h2>18.1.0 - 2020-11-12:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bsddb</span></code> name is reserved in PYPI, so we rename the project
+to <code class="docutils literal notranslate"><span class="pre">berkeleydb</span></code>. This has been a long trip:
+<a class="reference external" href="http://mailman.jcea.es/pipermail/pybsddb/2008-March/000019.html">http://mailman.jcea.es/pipermail/pybsddb/2008-March/000019.html</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="pre">
+<h2>18.1.0-pre:<a class="headerlink" href="#pre" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p>Support Oracle Berkeley DB 18.1.x.</p></li>
+<li><p>Drop support for Oracle Berkeley DB 4.7, 5.1 and 6.1.</p></li>
+<li><p>Drop support for Python 2.6, 2.7, 3.3, 3.4 and 3.5.</p></li>
+<li><p>The library name is migrated from <code class="docutils literal notranslate"><span class="pre">bsddb3</span></code> to <code class="docutils literal notranslate"><span class="pre">bsddb</span></code>. Reasons:</p>
+<ul>
+<li><p>In the old days, <code class="docutils literal notranslate"><span class="pre">bsddb</span></code> module was integrated with Python &lt; 3 . The
+release rate of new Python interpreters was slow, so <code class="docutils literal notranslate"><span class="pre">bsddb</span></code> was
+also distributed as an external package for faster deployment of
+improvements and support of new Oracle Berkeley DB releases. In order to
+be able to install a new version of this package without conflicting
+with the internal python <code class="docutils literal notranslate"><span class="pre">bsddb</span></code>, a new package name was required.
+At the time, the chosen name was <code class="docutils literal notranslate"><span class="pre">bsddb3</span></code> because it was the major
+release version of the supported Oracle Berkeley DB library.</p>
+<p>After Oracle released Berkeley DB major versions 4, 5, 6 and 18, <code class="docutils literal notranslate"><span class="pre">bsddb3</span></code>
+name was retained for compatibility, although it didn’t make sense
+anymore.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bsddb3</span></code> seems to refer to the Python 3 version of <code class="docutils literal notranslate"><span class="pre">bsddb</span></code>. This
+was never the case, and that was confusing. Even more now that
+legacy <code class="docutils literal notranslate"><span class="pre">bsddb3</span></code> is the Python 2/3 codebase and the new <code class="docutils literal notranslate"><span class="pre">bsddb</span></code> is
+Python 3 only.</p></li>
+<li><p>Since from now on this library is Python 3 only, I would hate that
+Python 2 users upgrading their Berkeley DB libraries would render
+their installation unable to run. In order to avoid that, a new name
+for the package is a good idea.</p></li>
+<li><p>I decided to go back to <code class="docutils literal notranslate"><span class="pre">bsddb</span></code>, since Python 2.7 is/should be dead.</p></li>
+<li><p>If your are running Python 3, please update your code to use
+<code class="docutils literal notranslate"><span class="pre">bsddb</span></code> instead of <code class="docutils literal notranslate"><span class="pre">bsddb3</span></code>.</p>
+<p>The old practice was to do:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">bsddb3</span> <span class="pre">as</span> <span class="pre">bsddb</span></code></p>
+</div></blockquote>
+<p>Now you can change that to:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">bsddb</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>This library was usually know as <code class="docutils literal notranslate"><span class="pre">bsddb</span></code>, <code class="docutils literal notranslate"><span class="pre">bsddb3</span></code> or <code class="docutils literal notranslate"><span class="pre">pybsddb</span></code>.
+From now on, it is <code class="docutils literal notranslate"><span class="pre">bsddb</span></code> everywhere.</p></li>
+<li><p>Testsuite driver migrated to Python 3.</p></li>
+<li><p>Since Oracle Berkeley DB 4.7 is not supported anymore,
+ancient method <code class="docutils literal notranslate"><span class="pre">DBEnv.set_rpc_server()</span></code> is not available anymore.</p></li>
+<li><p>If you try to install this package on Python 2,
+an appropriate error is raised and directions are provided.</p></li>
+<li><p>Remove dead code for unsupported Python releases.</p></li>
+<li><p>Remove dead code for unsupported Oracle Berkeley DB releases.</p></li>
+<li><p><strong>WARNING:</strong> Now <strong>ALL</strong> keys and values must be bytes (or ints when
+appropriate). Previous releases did mostly transparent encoding. This
+is not the case anymore. All needed encoding must be explicit in
+your code, both when reading and when writing to the database.</p></li>
+<li><p>In previous releases, database cursors were iterable under Python 3,
+but not under Python 2. For this release, database cursors are not
+iterable anymore. This will be improved in a future release.</p></li>
+<li><p>In previous releases, log cursors were iterable under Python 3,
+but not under Python 2. For this release, log cursors are not
+iterable anymore. This will be improved in a future release.</p></li>
+<li><p>Support for <code class="docutils literal notranslate"><span class="pre">DB_REPMGR_CONF_DISABLE_SSL</span></code> flag in
+<code class="docutils literal notranslate"><span class="pre">DB_ENV.rep_set_config()</span></code>.</p></li>
+<li><p><strong>WARNING:</strong> In Oracle Berkeley DB 18.1 and up, Replication Manager uses
+SSL by default.</p>
+<p>This configuration is currently unsupported.</p>
+<p>If you use Oracle Berkeley DB 18.1 and up and Replication Manager,
+you <em>MUST</em> configure the DB environment to not use SSL. You must do</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.rep_set_config(db.DB_REPMGR_CONF_DISABLE_SSL,</span> <span class="pre">1)</span></code></p>
+</div></blockquote>
+<p>in your code.</p>
+<p>This limitation will be overcomed in a future release of this project.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">open()</span></code> methods allow path-like objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBEnv.open()</span></code> accepts keyword arguments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBEnv.open()</span></code> allows no homedir and a homedir of <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.set_re_source()</span></code> uses local filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.set_re_source()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.verify()</span></code> was doing nothing at all. Now actually do the job.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.verify()</span></code> accepts path-like objects for <code class="docutils literal notranslate"><span class="pre">filename</span></code> and <code class="docutils literal notranslate"><span class="pre">outfile</span></code> if
+using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.upgrade()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.remove()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.remove()</span></code> could leak objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.rename()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.rename()</span></code> correctly invalidates the DB handle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB.get_re_source()</span></code> returns unicode objects with the local
+filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.fileid_reset()</span></code> accepts path-like objects if using Python 3.6 or
+up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.log_file()</span></code> correctly encode the filename according to the
+system FS encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.log_archive()</span></code> correctly encode the filenames according to the
+system FS encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.lsn_reset()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.remove()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.remove()</span></code> used to leave the DBENV handle in an unstable state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.dbrename()</span></code> accepts path-like objects for <code class="docutils literal notranslate"><span class="pre">filename</span></code> and <code class="docutils literal notranslate"><span class="pre">newname</span></code>
+if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.dbremove()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_lg_dir()</span></code> uses local filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_lg_dir()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.get_lg_dir()</span></code> returns unicode objects with the local
+filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_tmp_dir()</span></code> uses local filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_tmp_dir()</span></code> accepts path-like objects if using Python 3.6 or up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.get_tmp_dir()</span></code> returns unicode objects with the local
+filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_data_dir()</span></code> uses local filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_data_dir()</span></code> accepts path-like objects if using Python 3.6 or
+up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.get_data_dirs()</span></code> returns a tuple of unicode objects encoded with
+the local filename encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.log_prinf()</span></code> requires a bytes object not containing ‘0’.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">DB_ENV.lock_get()</span></code> name can not be None.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_re_pad()</span></code> param must be bytes or integer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.get_re_pad()</span></code> returns bytes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.set_re_delim()</span></code> param must be bytes or integer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DB_ENV.get_re_delim()</span></code> returns bytes.</p></li>
+<li><p>In the C code we don’t need <code class="docutils literal notranslate"><span class="pre">statichere</span></code> neither <code class="docutils literal notranslate"><span class="pre">staticforward</span></code>
+workarounds anymore.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">db.DB*</span></code> objects are created via the native classes, not via
+factories anymore.</p></li>
+<li><p>Drop support for <code class="docutils literal notranslate"><span class="pre">dbtables</span></code>. If you need it back, let me know.</p></li>
+<li><p>In Python 3.9, <code class="docutils literal notranslate"><span class="pre">find_unused_port</span></code> has been moved to
+<code class="docutils literal notranslate"><span class="pre">test.support.socket_helper</span></code>. Reported by Michał Górny.</p></li>
+<li><p>If we use <code class="docutils literal notranslate"><span class="pre">set_get_returns_none()</span></code> in the environment,
+the value could not be correctly inherited by the child
+databases. Reported by Patrick Laimbock and modern GCC
+warnings.</p></li>
+<li><p>Do not leak test files and directories.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">18.1.5 - 2022-01-21:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">18.1.4 - 2021-05-19:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">18.1.3 - 2021-05-19:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">18.1.2 - 2020-12-07:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">18.1.1 - 2020-12-01:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">18.1.0 - 2020-11-12:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pre">18.1.0-pre:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="history.html" title="previous chapter">History</a></li>
+      <li>Next: <a href="changelog-bsddb3.html" title="next chapter">Changelog of legacy “bsddb3” project</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

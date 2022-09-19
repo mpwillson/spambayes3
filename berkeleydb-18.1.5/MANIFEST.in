@@ -1,0 +1,27 @@
+include test-full_prerelease.py
+include setup3.py
+include test.py
+recursive-include src/berkeleydb *.py
+
+include *.txt
+include MANIFEST.in
+include pyproject.toml
+include setup.py
+include setup.cfg
+include ChangeLog
+include test.py
+
+recursive-include src *.py
+recursive-include docs *.rst *.html *.css *.gif *.jpg *.png *.js *.json *.txt
+recursive-include patches *.txt *.patch
+recursive-include src/Module berkeleydb.h berkeleydb.c
+recursive-include test *.py
+
+prune docs/build
+prune docs/tools/docutils
+prune docs/tools/sphinx
+prune docs/tools/pygments
+prune old
+prune test/db_home
+prune test/bsddb
+

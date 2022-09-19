@@ -1,0 +1,20 @@
+As seen in https://superuser.com/questions/997154/python-and-berkeley-db-versions-in-redhat-enterprise-linux-6-6-6-7-and-7-x
+RHEL7 has Python 2.7 and BDB 5.3. Includes legacy BDB 4.7 for compatibility, not used by the system.
+Ubuntu 16.04: Python 2.7, Python 3.5. BDB 5.3. Supported until 2021.
+Ubuntu 18.04: Python 2.7, Python 3.6. BDB 5.3. Supported until 2023.
+Pkgsrc 19.4.0 has BDB 4.8, 5.3 and 6.2.
+
+TODO: Implement PEP 384 (Stable API)
+TODO: Implement promises done in 18.1.0-pre changelog.
+TODO: Oracle has examples and multiple documentation. Link to them.
+PENDING: Documentation, website, mailing list update.
+
+CentOS 8: yum install gcc python3-devel libdb libdb-util libdb-devel (libdb-5.3.28)
+
+Docs: How to install (with env variables), replication, exception list,
+testsuite, not in Python 3.
+
+
+RELEASE DETAILS AVAILABLE AT "docs/changelog.rst".
+
+DETAILS OF LEGACY "bsddb3" RELEASES AVAILABLE AT "docs/changelog-bsddb3.rst".

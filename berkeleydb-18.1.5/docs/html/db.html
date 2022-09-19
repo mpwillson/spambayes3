@@ -1,0 +1,1106 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DB &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DBCursor" href="dbcursor.html" />
+    <link rel="prev" title="DBEnv" href="dbenv.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="db">
+<h1>DB<a class="headerlink" href="#db" title="Permalink to this headline">¶</a></h1>
+<p>Read <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/programmer_reference/index.html">Oracle documentation</a>
+for better understanding.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/db.html">More info…</a></p>
+<section id="db-methods">
+<h2>DB Methods<a class="headerlink" href="#db-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="DB">
+<span class="sig-name descname"><span class="pre">DB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbEnv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcreate.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#append" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenient version of put() that can be used for Recno, Queue
+and Heap databases. The DB_APPEND flag is automatically used,
+and the record number (Recno or Queue) or Record ID (RID)
+(Heap) is returned .
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbput.html#dbput_DB_APPEND">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="associate">
+<span class="sig-name descname"><span class="pre">associate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">secondaryDB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#associate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to associate secondaryDB to act as a secondary index for this
+(primary) database. The callback parameter should be a reference to a
+Python callable object that will construct and return the secondary
+key or DB_DONOTINDEX if the item should not be indexed. The
+parameters the callback will receive are the primaryKey and
+primaryData values.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbassociate.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes cached data and closes the database.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbclose.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="compact">
+<span class="sig-name descname"><span class="pre">compact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact_fillpercent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact_pages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#compact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compacts Btree and Recno access method databases, and optionally
+returns unused Btree, Hash or Recno database pages to the underlying
+filesystem.</p>
+<p>The method returns a dictionary with the following content:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deadlock</p></td>
+<td><p>If no txnid parameter was specified, the
+number of deadlocks which occurred</p></td>
+</tr>
+<tr class="row-even"><td><p>pages_examine</p></td>
+<td><p>The number of database pages reviewed
+during the compaction phase</p></td>
+</tr>
+<tr class="row-odd"><td><p>empty_buckets</p></td>
+<td><p>The number of empty hash buckets that
+were found the compaction phase</p></td>
+</tr>
+<tr class="row-even"><td><p>pages_free</p></td>
+<td><p>The number of database pages freed during
+the compaction phase</p></td>
+</tr>
+<tr class="row-odd"><td><p>levels</p></td>
+<td><p>The number of levels removed from the
+Btree or Recno database during the
+compaction phase</p></td>
+</tr>
+<tr class="row-even"><td><p>pages_truncated</p></td>
+<td><p>The number of database pages returned to
+the filesystem</p></td>
+</tr>
+<tr class="row-odd"><td><p>end</p></td>
+<td><p>Will be filled with the database key/page
+marking the end of the compaction
+operation</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcompact.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="consume">
+<span class="sig-name descname"><span class="pre">consume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#consume" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a database with the Queue access method, returns the record
+number and data from the first available record and deletes it from
+the queue.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget.html#dbget_DB_CONSUME">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="consume_wait">
+<span class="sig-name descname"><span class="pre">consume_wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#consume_wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a database with the Queue access method, returns the record
+number and data from the first available record and deletes it from
+the queue. If the Queue database is empty, the thread of control
+will wait until there is data in the queue before returning.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget.html#dbget_DB_CONSUME_WAIT">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cursor">
+<span class="sig-name descname"><span class="pre">cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a cursor on the DB and returns a DBCursor object. If a
+transaction is passed then the cursor can only be used within that
+transaction and you <em>must</em> be sure to close the cursor before
+commiting the transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcursor.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a key/data pair from the database.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbdel.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="exists">
+<span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if a key exists in the database. Returns True or False.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbexists.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fd">
+<span class="sig-name descname"><span class="pre">fd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a file descriptor for the database.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbfd.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data object associated with key. If key is an integer
+then the DB_SET_RECNO flag is automatically set for BTree databases
+and the actual key and the data value are returned as a tuple. If
+default is given then it is returned if the key is not found in the
+database. Partial records can be read using dlen and doff, however be
+sure to not read beyond the end of the actual data or you may get
+garbage.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pget">
+<span class="sig-name descname"><span class="pre">pget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pget" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is available only on secondary databases. It will return
+the primary key, given the secondary one, and associated data.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_transactional">
+<span class="sig-name descname"><span class="pre">get_transactional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_transactional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the database is transactional. False if not.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_transactional.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_priority">
+<span class="sig-name descname"><span class="pre">get_priority</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the cache priority for pages referenced by the DB handle.
+This priority value is set using the DB-&gt;set_priority() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_priority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_priority">
+<span class="sig-name descname"><span class="pre">set_priority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">priority</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the cache priority for pages referenced by the DB handle.</p>
+<p>The priority of a page biases the replacement algorithm to be more
+or less likely to discard a page when space is needed in the buffer
+pool. The bias is temporary, and pages will eventually be discarded
+if they are not referenced again. The DB-&gt;set_priority() method is
+only advisory, and does not guarantee pages will be treated in a
+specific way.</p>
+<p>The value provided must be symbolic. Check the Oracle documentation.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_priority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lk_exclusive">
+<span class="sig-name descname"><span class="pre">get_lk_exclusive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lk_exclusive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with two booleans.</p>
+<p>The first boolean indicates whether the handle is configured
+for exclusive database locking. If False, it is not configured
+for exclusive locking. If True, then it is configured for
+exclusive locking.</p>
+<p>The second boolean indicates whether the handle is configured
+for immediate locking. If False, then the locking operation
+will block until it can obtain an exclusive database lock. If
+True, then the locking operation will error out if it cannot
+immediately obtain an exclusive lock.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_lk_exclusive.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lk_exclusive">
+<span class="sig-name descname"><span class="pre">set_lk_exclusive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nowait_onoff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lk_exclusive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures the database handle to obtain a write lock on the
+entire database when it is opened. This gives the handle
+exclusive access to the database, because the write lock will
+block all other threads of control for both read and write
+access.</p>
+<p>The parameter is a boolean. If set to False, database opening
+will block until it can obtain the exclusive lock on the
+database. If set to True, a DBLockNotGrantedError exception is
+raised when the handle is opened if the exclusive database lock
+cannot be immediately obtained.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_lk_exclusive.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_dbname">
+<span class="sig-name descname"><span class="pre">get_dbname</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_dbname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the filename and the database name. If
+there is no database name, the value returned will be None.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_dbname.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_open_flags">
+<span class="sig-name descname"><span class="pre">get_open_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_open_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current open method flags. That is, this method returns
+the flags that were specified when DB-&gt;open() was called.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_open_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_private">
+<span class="sig-name descname"><span class="pre">set_private</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_private" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link an object to the DB object. This allows to pass around an
+arbitrary object. For instance, for callback context.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_private">
+<span class="sig-name descname"><span class="pre">get_private</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_private" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the object linked to the DB.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_both">
+<span class="sig-name descname"><span class="pre">get_both</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_both" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenient version of get() that automatically sets the DB_GET_BOTH
+flag, and which will be successful only if both the key and data
+value are found in the database. (Can be used to verify the presence
+of a record in the database when duplicate keys are allowed.)
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget.html#get_DB_GET_BOTH">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_byteswapped">
+<span class="sig-name descname"><span class="pre">get_byteswapped</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_byteswapped" title="Permalink to this definition">¶</a></dt>
+<dd><p>May be used to determine if the database was created on a machine
+with the same endianess as the current machine.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_byteswapped.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_size">
+<span class="sig-name descname"><span class="pre">get_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the size of the data object associated with key.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_type">
+<span class="sig-name descname"><span class="pre">get_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the database’s access method type. It can be called
+anytime and it doesn’t raise an exception if called before the
+database is open. If the database type is not known,
+“DB_UNKNOWN” is returned. This is a deviation from the Oracle
+Berkeley DB C API.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_type.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="join">
+<span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursorList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and return a specialized cursor for use in performing joins on
+secondary indices.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbjoin.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="key_range">
+<span class="sig-name descname"><span class="pre">key_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#key_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an estimate of the proportion of keys that are less than,
+equal to and greater than the specified key.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbkey_range.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbtype=DB_UNKNOWN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode=0660</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the database named dbname in the file named filename. The
+dbname argument is optional and allows applications to have multiple
+logical databases in a single physical file. It is an error to
+attempt to open a second database in a file that was not initially
+created using a database name. In-memory databases never intended to
+be shared or preserved on disk may be created by setting both the
+filename and dbname arguments to None.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbopen.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the key/data pair in the database. Partial data objects
+can be written using dlen and doff.</p>
+<p>If the DB_APPEND flag is used and the database is using the
+Recno, Queue or Heap access method then the record number
+(Recno or Queue) or Record ID (RID) (Heap) allocated to the
+data is returned.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbput.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a database.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbremove.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename a database.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbrename.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_encrypt">
+<span class="sig-name descname"><span class="pre">set_encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the password used by the Berkeley DB library to perform
+encryption and decryption. Because databases opened within Berkeley
+DB environments use the password specified to the environment, it is
+an error to attempt to set a password in a database created within an
+environment.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_encrypt.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_encrypt_flags">
+<span class="sig-name descname"><span class="pre">get_encrypt_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_encrypt_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the encryption flags.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_encrypt_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_bt_compare">
+<span class="sig-name descname"><span class="pre">set_bt_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compareFunc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_bt_compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the B-Tree database comparison function. This can only be called
+once before the database has been opened. compareFunc takes two
+arguments: (left key string, right key string) It must return a -1,
+0, 1 integer similar to cmp. You can shoot your database in the
+foot, beware!  Read the Berkeley DB docs for the full details of
+how the comparison function MUST behave.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_bt_compare.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_bt_minkey">
+<span class="sig-name descname"><span class="pre">get_bt_minkey</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_bt_minkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum number of key/data pairs intended to be stored on
+any single Btree leaf page. This value can be set using the
+DB-&gt;set_bt_minkey() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_bt_minkey.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_bt_minkey">
+<span class="sig-name descname"><span class="pre">set_bt_minkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minKeys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_bt_minkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the minimum number of keys that will be stored on any single
+BTree page.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_bt_minkey.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_cachesize">
+<span class="sig-name descname"><span class="pre">set_cachesize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gbytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_cachesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the size of the database’s shared memory buffer pool.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_cachesize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_cachesize">
+<span class="sig-name descname"><span class="pre">get_cachesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_cachesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the current size and composition of the cache.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_cachesize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_heapsize">
+<span class="sig-name descname"><span class="pre">set_heapsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gbytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_heapsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the maximum on-disk database file size used by a database
+configured to use the Heap access method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_heapsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_heapsize">
+<span class="sig-name descname"><span class="pre">get_heapsize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_heapsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used when the underlying database is configured to use the Heap
+access method. This method returns a tuple with the maximum
+size of the database’s heap file.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_heapsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_heap_regionsize">
+<span class="sig-name descname"><span class="pre">set_heap_regionsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">npages</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_heap_regionsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the number of pages in a region of a database configured
+to use the Heap access method. If this method is never called,
+the default region size for the database’s page size will be
+used.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_heap_regionsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_heap_regionsize">
+<span class="sig-name descname"><span class="pre">get_heap_regionsize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_heap_regionsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used when the underlying database is configured to use the Heap
+access method. This method returns the number of pages in a
+region.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_heap_regionsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_dup_compare">
+<span class="sig-name descname"><span class="pre">set_dup_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compareFunc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_dup_compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the duplicate data item comparison function. This can only be
+called once before the database has been opened. compareFunc takes
+two arguments: (left key string, right key string) It must return a
+-1, 0, 1 integer similar to cmp. You can shoot your database in the
+foot, beware!  Read the Berkeley DB docs for the full details of how
+the comparison function MUST behave.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_dup_compare.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_get_returns_none">
+<span class="sig-name descname"><span class="pre">set_get_returns_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_get_returns_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls what get and related methods do when a key is not found.</p>
+<p>See the DBEnv set_get_returns_none documentation.</p>
+<p>The previous setting is returned.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_flags">
+<span class="sig-name descname"><span class="pre">get_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current database flags as set by the DB-&gt;set_flags()
+method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_flags">
+<span class="sig-name descname"><span class="pre">set_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set additional flags on the database before opening.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_flags.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_h_ffactor">
+<span class="sig-name descname"><span class="pre">get_h_ffactor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_h_ffactor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the hash table density as set by the DB-&gt;set_h_ffactor()
+method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_h_ffactor.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_h_ffactor">
+<span class="sig-name descname"><span class="pre">set_h_ffactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ffactor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_h_ffactor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the desired density within the hash table.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_h_ffactor.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_h_nelem">
+<span class="sig-name descname"><span class="pre">get_h_nelem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_h_nelem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the estimate of the final size of the hash table as set by the
+DB-&gt;set_h_nelem() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_h_nelem.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_h_nelem">
+<span class="sig-name descname"><span class="pre">set_h_nelem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelem</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_h_nelem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an estimate of the final size of the hash table.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_h_nelem.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_lorder">
+<span class="sig-name descname"><span class="pre">get_lorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_lorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the database byte order; a byte order of 4,321 indicates a
+big endian order, and a byte order of 1,234 indicates a little endian
+order. This value is set using the DB-&gt;set_lorder() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_lorder.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_lorder">
+<span class="sig-name descname"><span class="pre">set_lorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lorder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_lorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the byte order for integers in the stored database metadata.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_lorder.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_pagesize">
+<span class="sig-name descname"><span class="pre">get_pagesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_pagesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the database’s current page size, as set by the
+DB-&gt;set_pagesize() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_pagesize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_pagesize">
+<span class="sig-name descname"><span class="pre">set_pagesize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pagesize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_pagesize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the size of the pages used to hold items in the database, in
+bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_pagesize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_re_delim">
+<span class="sig-name descname"><span class="pre">get_re_delim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_re_delim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the delimiting byte, which is used to mark the end of a
+record in the backing source file for the Recno access method.
+The return value will be a single character bytes object.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_re_delim.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_re_delim">
+<span class="sig-name descname"><span class="pre">set_re_delim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_re_delim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the delimiting byte used to mark the end of a record in the
+backing source file for the Recno access method. You can
+specify a single character bytes object or a numeric value.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_re_delim.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_re_len">
+<span class="sig-name descname"><span class="pre">get_re_len</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_re_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the records held in a Queue access method
+database. This value can be set using the DB-&gt;set_re_len() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_re_len.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_re_len">
+<span class="sig-name descname"><span class="pre">set_re_len</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_re_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>For the Queue access method, specify that the records are of length
+length. For the Recno access method, specify that the records are
+fixed-length, not byte delimited, and are of length length.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_re_len.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_re_pad">
+<span class="sig-name descname"><span class="pre">get_re_pad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_re_pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the pad character used for short, fixed-length records used
+by the Queue and Recno access methods. The return value will be
+a single character bytes object.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_re_pad.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_re_pad">
+<span class="sig-name descname"><span class="pre">set_re_pad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pad</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_re_pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the padding character for short, fixed-length records for
+the Queue and Recno access methods. You can specify a single
+character bytes object or a numeric value
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_re_pad.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_re_source">
+<span class="sig-name descname"><span class="pre">get_re_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_re_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the source file used by the Recno access method. This file is
+configured for the Recno access method using the DB-&gt;set_re_source()
+method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_re_source.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_re_source">
+<span class="sig-name descname"><span class="pre">set_re_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_re_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the underlying source file for the Recno access method.
+Accepts path-like object with Python 3.6 or up.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_re_source.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_q_extentsize">
+<span class="sig-name descname"><span class="pre">get_q_extentsize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_q_extentsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of pages in an extent. This value is used only for
+Queue databases and is set using the DB-&gt;set_q_extentsize() method.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbget_q_extentsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_q_extentsize">
+<span class="sig-name descname"><span class="pre">set_q_extentsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extentsize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_q_extentsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the size of the extents used to hold pages in a Queue database,
+specified as a number of pages. Each extent is created as a separate
+physical file. If no extent size is set, the default behavior is to
+create only a single underlying database file.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbset_q_extentsize.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stat">
+<span class="sig-name descname"><span class="pre">stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary containing database statistics with the following
+keys.</p>
+<p>For Hash databases:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 82%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>magic</p></td>
+<td><p>Magic number that identifies the file as a Hash
+database.</p></td>
+</tr>
+<tr class="row-even"><td><p>version</p></td>
+<td><p>Version of the Hash database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nkeys</p></td>
+<td><p>Number of unique keys in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>ndata</p></td>
+<td><p>Number of key/data pairs in the database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pagecnt</p></td>
+<td><p>The number of pages in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>pagesize</p></td>
+<td><p>Underlying Hash database page (&amp; bucket) size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nelem</p></td>
+<td><p>Estimated size of the hash table specified at
+database creation time.</p></td>
+</tr>
+<tr class="row-even"><td><p>ffactor</p></td>
+<td><p>Desired fill factor (number of items per bucket)
+specified at database creation time.</p></td>
+</tr>
+<tr class="row-odd"><td><p>buckets</p></td>
+<td><p>Number of hash buckets.</p></td>
+</tr>
+<tr class="row-even"><td><p>free</p></td>
+<td><p>Number of pages on the free list.</p></td>
+</tr>
+<tr class="row-odd"><td><p>bfree</p></td>
+<td><p>Number of bytes free on bucket pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>bigpages</p></td>
+<td><p>Number of big key/data pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>big_bfree</p></td>
+<td><p>Number of bytes free on big item pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>overflows</p></td>
+<td><p>Number of overflow pages (overflow pages are
+pages that contain items that did not fit in
+the main bucket page).</p></td>
+</tr>
+<tr class="row-odd"><td><p>ovfl_free</p></td>
+<td><p>Number of bytes free on overflow pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>dup</p></td>
+<td><p>Number of duplicate pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>dup_free</p></td>
+<td><p>Number of bytes free on duplicate pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>metaflags</p></td>
+<td><p>Reports internal flags. For internal use only.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ext_files</p></td>
+<td><p>The number of external files.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>For BTree and Recno databases:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>magic</p></td>
+<td><p>Magic number that identifies the file as a
+Btree database.</p></td>
+</tr>
+<tr class="row-even"><td><p>version</p></td>
+<td><p>Version of the Btree database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nkeys</p></td>
+<td><p>For the Btree Access Method, the number of
+unique keys in the database.</p>
+<p>For the Recno Access Method, the number of
+records in the database. If the database has
+been configured to not re-number records
+during deletion, the number of records may
+include records that have been deleted.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>ndata</p></td>
+<td><p>For the Btree Access Method, the number of
+key/data pairs in the database.</p>
+<p>For the Recno Access Method, the number of
+records in the database. If the database has
+been configured to not re-number records
+during deletion, the number of records may
+include records that have been deleted.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>pagecnt</p></td>
+<td><p>The number of pages in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>pagesize</p></td>
+<td><p>Underlying database page size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>minkey</p></td>
+<td><p>Minimum keys per page.</p></td>
+</tr>
+<tr class="row-even"><td><p>re_len</p></td>
+<td><p>Length of fixed-length records.</p></td>
+</tr>
+<tr class="row-odd"><td><p>re_pad</p></td>
+<td><p>Padding byte value for fixed-length records.</p></td>
+</tr>
+<tr class="row-even"><td><p>levels</p></td>
+<td><p>Number of levels in the database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>int_pg</p></td>
+<td><p>Number of database internal pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>leaf_pg</p></td>
+<td><p>Number of database leaf pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>dup_pg</p></td>
+<td><p>Number of database duplicate pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>over_pg</p></td>
+<td><p>Number of database overflow pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>empty_pg</p></td>
+<td><p>Number of empty database pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>free</p></td>
+<td><p>Number of pages on the free list.</p></td>
+</tr>
+<tr class="row-odd"><td><p>int_pgfree</p></td>
+<td><p>Num of bytes free in database internal pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>leaf_pgfree</p></td>
+<td><p>Number of bytes free in database leaf pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>dup_pgfree</p></td>
+<td><p>Num bytes free in database duplicate pages.</p></td>
+</tr>
+<tr class="row-even"><td><p>over_pgfree</p></td>
+<td><p>Num of bytes free in database overflow pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>metaflags</p></td>
+<td><p>Reports internal flags. For internal use only</p></td>
+</tr>
+<tr class="row-even"><td><p>ext_files</p></td>
+<td><p>The number of external files.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>For Queue databases:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>magic</p></td>
+<td><p>Magic number that identifies the file as a
+Queue database.</p></td>
+</tr>
+<tr class="row-even"><td><p>version</p></td>
+<td><p>Version of the Queue file type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nkeys</p></td>
+<td><p>Number of records in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>ndata</p></td>
+<td><p>Number of records in the database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pagesize</p></td>
+<td><p>Underlying database page size.</p></td>
+</tr>
+<tr class="row-even"><td><p>extentsize</p></td>
+<td><p>Underlying database extent size, in pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pages</p></td>
+<td><p>Number of pages in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>re_len</p></td>
+<td><p>Length of the records.</p></td>
+</tr>
+<tr class="row-odd"><td><p>re_pad</p></td>
+<td><p>Padding byte value for the records.</p></td>
+</tr>
+<tr class="row-even"><td><p>pgfree</p></td>
+<td><p>Number of bytes free in database pages.</p></td>
+</tr>
+<tr class="row-odd"><td><p>first_recno</p></td>
+<td><p>First undeleted record in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>cur_recno</p></td>
+<td><p>Last allocated record number in the database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>metaflags</p></td>
+<td><p>Reports internal flags. For internal use only</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>For Heap databases:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>magic</p></td>
+<td><p>Magic number that identifies the file as a
+Heap database.</p></td>
+</tr>
+<tr class="row-even"><td><p>nrecs</p></td>
+<td><p>Reports the number of records in the Heap
+database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>pagecnt</p></td>
+<td><p>The number of pages in the database.</p></td>
+</tr>
+<tr class="row-even"><td><p>pagesize</p></td>
+<td><p>The underlying database page (and bucket)
+size, in bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nregions</p></td>
+<td><p>The number of regions in the Heap database.</p></td>
+</tr>
+<tr class="row-even"><td><p>regionsize</p></td>
+<td><p>The number of pages in a region in the Heap
+database.</p></td>
+</tr>
+<tr class="row-odd"><td><p>version</p></td>
+<td><p>The version of the Heap database.</p></td>
+</tr>
+<tr class="row-even"><td><p>metaflags</p></td>
+<td><p>Reports internal flags. For internal use only</p></td>
+</tr>
+<tr class="row-odd"><td><p>ext_files</p></td>
+<td><p>The number of external files.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbstat.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stat_print">
+<span class="sig-name descname"><span class="pre">stat_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stat_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the database statistical information.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbstat_print.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes any cached information to disk.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbsync.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="truncate">
+<span class="sig-name descname"><span class="pre">truncate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#truncate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empties the database, discarding all records it contains. The number
+of records discarded from the database is returned.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbtruncate.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="upgrade">
+<span class="sig-name descname"><span class="pre">upgrade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#upgrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upgrades all of the databases included in the file filename, if
+necessary.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbupgrade.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#verify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies the integrity of all databases in the file specified by the
+filename argument, and optionally outputs the databases’ key/data
+pairs to a file.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbverify.html">More info…</a></p>
+</dd></dl>
+
+</section>
+<section id="db-mapping-and-compatibility-methods">
+<h2>DB Mapping and Compatibility Methods<a class="headerlink" href="#db-mapping-and-compatibility-methods" title="Permalink to this headline">¶</a></h2>
+<p>These methods of the DB type are for implementing the Mapping Interface,
+as well as others for making a DB behave as much like a dictionary as
+possible. The main downside to using a DB as a dictionary is you are not
+able to specify a transaction object.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DB_length()</span> <span class="pre">[</span> <span class="pre">usage:</span> <span class="pre">len(db)</span> <span class="pre">]</span></span></dt>
+<dd><p>Return the number of key/data pairs in the database.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DB_subscript(key)</span> <span class="pre">[</span> <span class="pre">usage:</span> <span class="pre">db[key]</span> <span class="pre">]</span></span></dt>
+<dd><p>Return the data associated with key.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">DB_ass_sub(key,</span> <span class="pre">data)</span> <span class="pre">[</span> <span class="pre">usage:</span> <span class="pre">db[key]</span> <span class="pre">=</span> <span class="pre">data</span> <span class="pre">]</span></span></dt>
+<dd><p>Assign or update a key/data pair, or delete a key/data pair if data
+is NULL.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all keys in the database. Warning: this method
+traverses the entire database so it can possibly take a long time to
+complete.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of tuples of all key/data pairs in the database.
+Warning: this method traverses the entire database so it can possibly
+take a long time to complete.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all data values in the database. Warning: this
+method traverses the entire database so it can possibly take a long
+time to complete.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="has_key">
+<span class="sig-name descname"><span class="pre">has_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#has_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if key is present in the database.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#db-methods">DB Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#db-mapping-and-compatibility-methods">DB Mapping and Compatibility Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="dbenv.html" title="previous chapter">DBEnv</a></li>
+      <li>Next: <a href="dbcursor.html" title="next chapter">DBCursor</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

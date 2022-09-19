@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DBTxn &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DBLock" href="dblock.html" />
+    <link rel="prev" title="DBLogCursor" href="dblogcursor.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dbtxn">
+<h1>DBTxn<a class="headerlink" href="#dbtxn" title="Permalink to this headline">¶</a></h1>
+<p>Read <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/programmer_reference/index.html">Oracle documentation</a>
+for better understanding.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txn.html">More info…</a></p>
+<section id="dbtxn-methods">
+<h2>DBTxn Methods<a class="headerlink" href="#dbtxn-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="abort">
+<span class="sig-name descname"><span class="pre">abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#abort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aborts the transaction
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnabort.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="commit">
+<span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ends the transaction, committing any changes to the databases.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txncommit.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The txn_id function returns the unique transaction id associated with
+the specified transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnid.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiates the beginning of a two-phase commit. A global identifier
+parameter is required, which is a value unique across all processes
+involved in the commit. It must be a string of DB_GID_SIZE bytes.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnprepare.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="discard">
+<span class="sig-name descname"><span class="pre">discard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discard" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method frees up all the per-process resources associated with
+the specified transaction, neither committing nor aborting the
+transaction. The transaction will be keep in “unresolved” state. This
+call may be used only after calls to “dbenv.txn_recover()”. A
+“unresolved” transaction will be returned again thru new calls to
+“dbenv.txn_recover()”.</p>
+<p>For example, when there are multiple global transaction managers
+recovering transactions in a single Berkeley DB environment, any
+transactions returned by “dbenv.txn_recover()” that are not handled
+by the current global transaction manager should be discarded using
+“txn.discard()”.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txndiscard.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_timeout">
+<span class="sig-name descname"><span class="pre">set_timeout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets timeout values for locks or transactions for the specified
+transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnset_timeout.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the string associated with the transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnget_name.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_name">
+<span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Associates the specified string with the transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnset_name.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_priority">
+<span class="sig-name descname"><span class="pre">get_priority</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the priority value of the transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnget_priority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_priority">
+<span class="sig-name descname"><span class="pre">set_priority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">priority</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the priority for the transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/txnset_priority.html">More info…</a></p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbcursor.html">DBCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DBTxn</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dbtxn-methods">DBTxn Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="dblogcursor.html" title="previous chapter">DBLogCursor</a></li>
+      <li>Next: <a href="dblock.html" title="next chapter">DBLock</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

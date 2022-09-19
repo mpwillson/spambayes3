@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DBCursor &#8212; BerkeleyDB 18.1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DBLogCursor" href="dblogcursor.html" />
+    <link rel="prev" title="DB" href="db.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dbcursor">
+<h1>DBCursor<a class="headerlink" href="#dbcursor" title="Permalink to this headline">¶</a></h1>
+<p>Read <a class="reference external" href="https://docs.oracle.com/database/bdb181/html/programmer_reference/index.html">Oracle documentation</a>
+for better understanding.</p>
+<p><a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbc.html">More info…</a></p>
+<section id="dbcursor-methods">
+<h2>DBCursor Methods<a class="headerlink" href="#dbcursor-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discards the cursor. If the cursor is created within a transaction
+then you <em>must</em> be sure to close the cursor before commiting the
+transaction.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcclose.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a count of the number of duplicate data items for the key
+referenced by the cursor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbccount.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the key/data pair currently referenced by the cursor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcdel.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dup">
+<span class="sig-name descname"><span class="pre">dup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new cursor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcdup.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_priority">
+<span class="sig-name descname"><span class="pre">set_priority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">priority</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the cache priority for pages referenced by the DBC handle.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcset_priority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_priority">
+<span class="sig-name descname"><span class="pre">get_priority</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the cache priority for pages referenced by the DBC handle.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget_priority.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the key/data pair into the database. Partial data records can
+be written using dlen and doff.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcput.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get" title="Permalink to this definition">¶</a></dt>
+<dd><p>See get(key, data, flags, dlen=-1, doff=-1) below.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>See get(key, data, flags, dlen=-1, doff=-1) below.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves key/data pairs from the database using the cursor. All the
+specific functionalities of the get method are actually provided by
+the various methods below, which are the preferred way to fetch data
+using the cursor. These generic interfaces are only provided as an
+inconvenience. Partial data records are returned if dlen and doff
+are used in this method and in many of the specific methods below.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pget">
+<span class="sig-name descname"><span class="pre">pget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pget" title="Permalink to this definition">¶</a></dt>
+<dd><p>See pget(key, data, flags, dlen=-1, doff=-1) below.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">pget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd><p>See pget(key, data, flags, dlen=-1, doff=-1) below.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">pget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to the already described get(). This method is available only
+on secondary databases. It will return the primary key, given the
+secondary one, and associated data
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html">More info…</a></p>
+</dd></dl>
+
+</section>
+<section id="dbcursor-get-methods">
+<h2>DBCursor Get Methods<a class="headerlink" href="#dbcursor-get-methods" title="Permalink to this headline">¶</a></h2>
+<p>These DBCursor methods are all wrappers around the get() function in the
+C API.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="current">
+<span class="sig-name descname"><span class="pre">current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key/data pair currently referenced by the cursor.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_CURRENT">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_current_size">
+<span class="sig-name descname"><span class="pre">get_current_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_current_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns length of the data for the current entry referenced by the
+cursor.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="first">
+<span class="sig-name descname"><span class="pre">first</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position the cursor to the first key/data pair and return it.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_FIRST">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="last">
+<span class="sig-name descname"><span class="pre">last</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position the cursor to the last key/data pair and return it.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_LAST">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="next">
+<span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position the cursor to the next key/data pair and return it.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_NEXT">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prev">
+<span class="sig-name descname"><span class="pre">prev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position the cursor to the previous key/data pair and return it.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_PREV">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="consume">
+<span class="sig-name descname"><span class="pre">consume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#consume" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a database with the Queue access method, returns the record
+number and data from the first available record and deletes it from
+the queue.</p>
+<p><em>NOTE:</em> This method is deprecated in Oracle Berkeley DB version
+3.2 in favor of the new consume method in the DB class.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_both">
+<span class="sig-name descname"><span class="pre">get_both</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_both" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like set() but positions the cursor to the record matching both key
+and data. (An alias for this is set_both, which makes more sense to
+me…)
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_GET_BOTH">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_recno">
+<span class="sig-name descname"><span class="pre">get_recno</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_recno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the record number associated with the cursor. The database
+must use the BTree access method and have been created with the
+DB_RECNUM flag.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_GET_RECNO">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="join_item">
+<span class="sig-name descname"><span class="pre">join_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>For cursors returned from the DB.join method, returns the combined
+key value from the joined cursors.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_JOIN_ITEM">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="next_dup">
+<span class="sig-name descname"><span class="pre">next_dup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#next_dup" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the next key/data pair of the database is a duplicate record for
+the current key/data pair, the cursor is moved to the next key/data
+pair of the database, and that pair is returned.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_NEXT_DUP">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="next_nodup">
+<span class="sig-name descname"><span class="pre">next_nodup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#next_nodup" title="Permalink to this definition">¶</a></dt>
+<dd><p>The cursor is moved to the next non-duplicate key/data pair of the
+database, and that pair is returned.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_NEXT_NODUP">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prev_dup">
+<span class="sig-name descname"><span class="pre">prev_dup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prev_dup" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the previous key/data pair of the database is a duplicate data
+record for the current key/data pair, the cursor is moved to the
+previous key/data pair of the database, and that pair is returned.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_PREV_DUP">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prev_nodup">
+<span class="sig-name descname"><span class="pre">prev_nodup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prev_nodup" title="Permalink to this definition">¶</a></dt>
+<dd><p>The cursor is moved to the previous non-duplicate key/data pair of
+the database, and that pair is returned.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_PREV_NODUP">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move the cursor to the specified key in the database and return the
+key/data pair found there.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_SET">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_range">
+<span class="sig-name descname"><span class="pre">set_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identical to set() except that in the case of the BTree access
+method, the returned key/data pair is the smallest key greater than
+or equal to the specified key (as determined by the comparison
+function), permitting partial key matches and range searches.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_SET_RANGE">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_recno">
+<span class="sig-name descname"><span class="pre">set_recno</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_recno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move the cursor to the specific numbered record of the database, and
+return the associated key/data pair. The underlying database must be
+of type Btree and it must have been created with the DB_RECNUM flag.
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_SET_RECNO">More info…</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="set_both">
+<span class="sig-name descname"><span class="pre">set_both</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_both" title="Permalink to this definition">¶</a></dt>
+<dd><p>See get_both(). The only difference in behaviour can be disabled
+using set_get_returns_none(2).
+<a class="reference external" href="https://docs.oracle.com/database/bdb181/html/api_reference/C/dbcget.html#dbcget_DB_GET_BOTH">More info…</a></p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BerkeleyDB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Oracle Berkeley DB 4.8, 5.3, 6.2 and 18.1 Python Extension Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbenv.html">DBEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">DB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DBCursor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dbcursor-methods">DBCursor Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dbcursor-get-methods">DBCursor Get Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dblogcursor.html">DBLogCursor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbtxn.html">DBTxn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dblock.html">DBLock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsequence.html">DBSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbsite.html">DBSite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog-bsddb3.html">Changelog of legacy “bsddb3” project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">DONATE!</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="db.html" title="previous chapter">DB</a></li>
+      <li>Next: <a href="dblogcursor.html" title="next chapter">DBLogCursor</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008-2022 Jesús Cea Avión.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
