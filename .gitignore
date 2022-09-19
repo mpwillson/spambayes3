@@ -1,0 +1,8 @@
+test-ascii
+test-utf8
+*~
+bsddb3/bsddb3-6.2.6/build/*
+bsddb3/bsddb3-6.2.6/dist/*
+berkeleydb-*/build/*
+berkeleydb-*/dist/*
+*__pycache__*
