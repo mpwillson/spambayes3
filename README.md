@@ -4,6 +4,8 @@ An attempt to port the sadly neglected spambayes spam analysis
 software to Python 3.  The migration was based on spambasyes-1.1a6, the
 latest version available (as far as I can tell).
 
+Tested on FreeBSD 13.1 using python 3.9.13.
+
 ## Progress
 
 scripts/sb_filter.py, scripts/sb_mboxtrain.py and the supporting
@@ -15,6 +17,34 @@ Merged in updates from a later spambayes release (1.1b3). This later
 version was located by ajschorr.
 
 No additional code has been converted to Python 3.
+
+### Database [2022-09-19]
+
+Replaced deprecated bsdbd3 module by berkeleydb. To build and install,
+run the following commands in the berkeleydb-*version* directory:
+
+
+``` shell
+python setup3.py build
+sudo python setup3.py install
+```
+
+Alternatively, install berkeleydb directly from pypi.org, using:
+
+``` shell
+pip install berkeleydb
+```
+
+## Running
+
+The setup.py script has not been tested.  It's possible to run scripts
+directly from the spambayes3 directory, using something like this:
+
+``` shell
+#!/bin/sh
+export PYTHONPATH=${HOME}/dev/spambayes3
+python ${PYTHONPATH}/scripts/sb_filter.py #-o globals:verbose:True
+```
 
 # Original README.TXT
 
