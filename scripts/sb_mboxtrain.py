@@ -243,6 +243,7 @@ def mhdir_train(h, path, is_spam, force):
                          (trained, counter))
 
 def train(h, path, is_spam, force, trainnew, removetrained):
+    path = os.path.expanduser(os.path.expandvars(path))
     if not os.path.exists(path):
         raise ValueError("Nonexistent path: %s" % path)
     elif os.path.isfile(path):
@@ -331,6 +332,7 @@ def main():
     if save:
         h.store()
 
+    h.close()
 
 if __name__ == "__main__":
     main()
