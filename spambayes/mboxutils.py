@@ -39,7 +39,7 @@ class DirOfTxtFileMailbox:
     on the first line, then the raw message text, then the contents of
     a plist (XML) file that contains data that Mail uses (subject,
     flags, sender, and so forth).  We ignore this plist data).
-    
+
     Subdirectories are traversed recursively.
     """
 
@@ -73,7 +73,7 @@ def full_messages(msgs):
     """
     for x in msgs:
         yield x.get_full_message()
-    
+
 def _cat(seqs):
     for seq in seqs:
         for item in seq:
@@ -116,15 +116,15 @@ def getmbox(name):
         parts = re.compile(
 ':(?P<user>[^@:]+):(?P<pwd>[^@]+)@(?P<server>[^:]+(:[0-9]+)?):(?P<name>[^:]+)'
         ).match(name).groupdict()
-        
+
         from scripts.sb_imapfilter import IMAPSession, IMAPFolder
         from spambayes import Stats, message
         from spambayes.Options import options
-        
+
         sesion = IMAPSession(parts['server'])
         session.login(parts['user'], parts['pwd'])
         folder_list = session.folder_list()
-        
+
         if name == "ALL":
             names = folder_list
         else:
@@ -133,12 +133,12 @@ def getmbox(name):
         message_db = message.message().message_info_db
         stats = Stats.Stats(options, message_db)
         mboxes = [IMAPFolder(n, session, stats) for n in names]
-        
+
         if len(mboxes) == 1:
             return full_messages(mboxes[0])
         else:
             return _cat([full_messages(x) for x in mboxes])
-        
+
     if os.path.isdir(name):
         # XXX Bogus: use a Maildir if /cur is a subdirectory, else a MHMailbox
         # if the pathname contains /Mail/, else a DirOfTxtFileMailbox.
@@ -208,7 +208,7 @@ def as_string(msg, unixfrom=False):
         return msg
     try:
         return msg.as_string(unixfrom)
-    except TypeError:
+    except (TypeError, UnicodeEncodeError):
         ty, val, tb = sys.exc_info()
         exclines = traceback.format_exception(ty, val, tb)[1:]
         excstr = "    ".join(exclines).strip()
@@ -225,8 +225,8 @@ def as_string(msg, unixfrom=False):
                 parts.append(boundary)
             try:
                 parts.append(part.as_string())
-            except AttributeError:
-                parts.append(str(part))
+            except (TypeError, UnicodeEncodeError, AttributeError):
+                parts.append(part)
         if boundary:
             parts.append("--%s--" % boundary)
         # make sure it ends with a newline:
