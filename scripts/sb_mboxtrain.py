@@ -44,6 +44,7 @@ Where OPTIONS is one or more of:
 
 import sys, os, getopt, email
 import shutil
+import re
 from spambayes import hammie, storage, mboxutils
 from spambayes.Options import options, get_pathname_option
 
@@ -59,14 +60,14 @@ def get_message(obj):
 
     """
 
-    if isinstance(obj, email.Message.Message):
+    if isinstance(obj, email.message.EmailMessage):
         return obj
     # Create an email Message object.
     if hasattr(obj, "read"):
-        obj = obj.read()
+        obj = obj.read().decode('utf-8','ignore')
     try:
-        msg = email.message_from_string(obj)
-    except email.Errors.MessageParseError:
+        msg = email.message_from_string(obj,policy=email.policy.default)
+    except email.errors.MessageParseError:
         msg = None
     return msg
 
@@ -127,7 +128,7 @@ def maildir_train(h, path, is_spam, force, removetrained):
         if loud and counter % 10 == 0:
             sys.stdout.write("\r%6d" % counter)
             sys.stdout.flush()
-        f = file(cfn, "rb")
+        f = open(cfn, "rb")
         msg = get_message(f)
         f.close()
         if not msg:
@@ -138,16 +139,19 @@ def maildir_train(h, path, is_spam, force, removetrained):
         trained += 1
         if not options["Headers", "include_trained"]:
             continue
-        f = file(tfn, "wb")
-        f.write(mboxutils.as_string(msg))
+        f = open(tfn, "wb")
+        f.write(mboxutils.as_string(msg).encode())
         f.close()
+        # update file name with new size
+        new_cfn= re.sub(r'S=([0-9]+)',f'S={os.path.getsize(tfn)},',fn)
         shutil.copystat(cfn, tfn)
 
         # XXX: This will raise an exception on Windows.  Do any Windows
         # people actually use Maildirs?
-        os.rename(tfn, cfn)
+        os.rename(tfn, new_cfn)
+        if cfn != new_cfn: os.unlink(cfn)
         if (removetrained):
-            os.unlink(cfn)
+            os.unlink(new_cfn)
 
     if loud:
         sys.stdout.write("\r%6d" % counter)
