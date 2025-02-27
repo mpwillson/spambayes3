@@ -1638,11 +1638,13 @@ class Tokenizer:
             except:
                 yield "control: couldn't decode"
                 text = part.get_payload(decode=True) # get bytes
-                if text is not None:
-                    text = try_to_repair_damaged_base64(text)
+                # make string _before_ attempting repair (MPW 2025-02-25)
+                # prevent unknown encodings causing a subsequent
+                # TypeError: cannot use a string pattern on a bytes-like object
                 if text is not None:
                     text = text.decode('utf-8','ignore') # make str
-
+                if text is not None:
+                    text = try_to_repair_damaged_base64(text)
             if text is None:
                 yield 'control: payload is None'
                 continue
