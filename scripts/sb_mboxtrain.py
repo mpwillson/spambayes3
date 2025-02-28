@@ -142,16 +142,17 @@ def maildir_train(h, path, is_spam, force, removetrained):
         f = open(tfn, "wb")
         f.write(mboxutils.as_string(msg).encode())
         f.close()
-        # update file name with new size
-        new_cfn= re.sub(r'S=([0-9]+)',f'S={os.path.getsize(tfn)},',fn)
-        shutil.copystat(cfn, tfn)
-
-        # XXX: This will raise an exception on Windows.  Do any Windows
-        # people actually use Maildirs?
-        os.rename(tfn, new_cfn)
-        if cfn != new_cfn: os.unlink(cfn)
         if (removetrained):
-            os.unlink(new_cfn)
+            os.unlink(cfn)
+        else:
+            # update file name with new size
+            new_cfn = re.sub(r'S=([0-9]+)',f'S={os.path.getsize(tfn)},',cfn)
+            shutil.copystat(cfn, tfn)
+            # XXX: This will raise an exception on Windows.  Do any Windows
+            # people actually use Maildirs?
+            os.rename(tfn, new_cfn)
+            if cfn != new_cfn:
+                os.unlink(cfn)
 
     if loud:
         sys.stdout.write("\r%6d" % counter)
