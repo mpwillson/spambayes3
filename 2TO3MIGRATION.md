@@ -182,9 +182,9 @@ Looks like a bad call in the email module.
         return self.parse(StringIO(text), headersonly=headersonly)
     TypeError: initial_value must be str or None, not Message
 
-I'd replaced `email.Message.Message` with `email.message.EmailMessage`.
-The replacement should have been `email.message.Message`. This change
-to `email.message.EmailMessage` was wrong.  See later.
+I'd replaced `email.Message.Message` with
+`email.message.EmailMessage`.  The replacement should have been
+`email.message.Message`. This change was *wrong*.  See later.
 
 ## tokenizer.py
 
@@ -411,7 +411,7 @@ The above change broke sb_mboxtrain.py:
     TypeError: initial_value must be str or None, not mboxMessage
 
 Changed mboxutils.get_message to treat obj or type mailbox.mboxMessage
-the same as email.message.EmailMessage and just return it. 
+the same as email.message.EmailMessage and just return it.
 
     if isinstance(obj, email.message.EmailMessage) or \
        isinstance(obj, mailbox.mboxMessage):
@@ -454,7 +454,96 @@ That didn't work.  The result was this:
     TypeError: cannot use a string pattern on a bytes-like object
 
 The correct fix was to read mbox messages as
-email.message.EmailMessage, using a factory. Fix is to sb_mboxtrain.py
-in mbox_train.
+email.message.EmailMessage, using a factory. Change is to `mbox_train` in
+`sb_mboxtrain.py`.
+
+Define this factory method:
+
+    def mbox_factory(f):
+        """Return mbox messages as EmailMessage"""
+
+        return email.message_from_binary_file(f,policy=email.policy.default)
+
+and invoke (in `mbox_train`) with:
+
+    mbox = mailbox.mbox(path,factory=mbox_factory,create=False)
 
 From: [Stackoverflow](https://stackoverflow.com/questions/57456080/in-python-how-to-convert-an-email-message-message-object-into-an-email-messag)
+
+# Defect in handling unknown encodings
+
+## spambayes/tokenizer.py
+
+An unknown email language encoding caused a nested exception in
+`tokenize_body`. The possible fix is to decode to str before calling
+`try_to_repair_damaged_base64`:
+
+    for part in textparts(msg):
+    # Get utf-8 content, otherwise treat as bytes/base64
+    # (might be the wrong thing to do, as it reverses original sequence)
+    try:
+        text = part.get_content()
+        except:
+            yield "control: couldn't decode"
+            text = part.get_payload(decode=True) # get bytes
+            # make string _before_ attempting repair (MPW 2025-02-25)
+            # prevent unknown encodings causing a subsequent
+            # TypeError: cannot use a string pattern on a bytes-like object
+            if text is not None:
+                text = text.decode('utf-8','ignore') # make str
+            if text is not None:
+                    text = try_to_repair_damaged_base64(text)
+            if text is None:
+                yield 'control: payload is None'
+                continue
+
+# Port maildir_train to python 3 (`sb_mboxtrain.py`)
+
+Use `open()` rather than `file()`.
+
+Change `get_message()` so that it decodes the bytes to str before
+converting to an email message:
+
+    def get_message(obj):
+        """Return an email Message object.
+
+        This works like mboxutils.get_message, except it doesn't junk the
+        headers if there's an error.  Doing so would cause a headerless
+        message to be written back out!
+
+        """
+
+        if isinstance(obj, email.message.EmailMessage):
+            return obj
+        # Create an email Message object.
+        if hasattr(obj, "read"):
+            obj = obj.read().decode('utf-8','ignore')
+        try:
+            msg = email.message_from_string(obj,policy=email.policy.default)
+        except email.errors.MessageParseError:
+            msg = None
+        return msg
+
+When writing the trained mail out, encode the string before writing:
+
+    f = open(tfn, "wb")
+    f.write(mboxutils.as_string(msg).encode())
+    f.close()
+
+Also needed to modify the filename of a trained email file, so that the
+size value is correct (S=xxxx) (only rename if keeping trained mail):
+
+    if (removetrained):
+        os.unlink(cfn)
+    else:
+        # update file name with new size
+        new_cfn = re.sub(r'S=([0-9]+)',f'S={os.path.getsize(tfn)},',cfn)
+        shutil.copystat(cfn, tfn)
+        # XXX: This will raise an exception on Windows.  Do any Windows
+        # people actually use Maildirs?
+        os.rename(tfn, new_cfn)
+        if cfn != new_cfn:
+            os.unlink(cfn)
+
+N.B. Dovecot really dislikes the actual size of the file being different to
+the size represented in the filename.
